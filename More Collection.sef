@@ -1,0 +1,123 @@
+[extension_name]
+More Collection
+[extension_info]
+array/object util functions
+[insert_external]
+[insert_command]
+SAMMI.extCommand('Object Get Entries', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''] });
+SAMMI.extCommand('Entries to Object', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Entries', 14, ''] });
+SAMMI.extCommand('Array Reverse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''] });
+SAMMI.extCommand('Array Flatten', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''], 'doall': ['Flatten All Layer', 2, false] });
+SAMMI.extCommand('Array Transpose', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input 2D Array', 14, ''] });
+SAMMI.extCommand('Array Zip', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
+SAMMI.extCommand('Array Make Unique', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''] });
+SAMMI.extCommand('Array Intersect', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
+SAMMI.extCommand('Array Union', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
+SAMMI.extCommand('Object Union', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Object 1', 14, ''], 'b': ['Input Object 2', 14, ''] });
+SAMMI.extCommand('Array Exclusion', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
+SAMMI.extCommand('Object Filter by Key', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''] });
+SAMMI.extCommand('Object Filter by Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''] });
+SAMMI.extCommand('Object Map Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'operator': ['Operator', 9, ''], 'number': ['Variable/Number', 15, ''] });
+SAMMI.extCommand('Object Get Sorted Keys by Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'asc': ['Ascending', 2, false] });
+SAMMI.extCommand('Get Random Element', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''] });
+SAMMI.extCommand('Get Random Element From Weighted List', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object(Key: Output, Value: Weight)', 14, ''] });
+SAMMI.extCommand('String Occurance', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'str': ['Input String', 14, ''], 'substr': ['Input Pattern', 14, ''] });
+SAMMI.extCommand('String Pad Start', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, '0'], 'len': ['Input Pad Length', 15, 1] });
+SAMMI.extCommand('String Pad End', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, ' '], 'len': ['Input Pad Length', 15, 1] });
+[insert_hook]
+case "Object Get Entries": { (async () => { apply(Object.entries, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Entries to Object": { (async () => { apply(kvpair => { let ret = {}; for (let kv of kvpair) ret[kv[0]] = kv[1]; return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Reverse": { (async () => { apply(a => a.reverse(), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Flatten": { (async () => { apply((a, b) => { if (!b) return a.flat(); while (a.some(Array.isArray)) a = a.flat(); return a; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.doall); })(); } break
+case "Array Transpose": { (async () => { apply(a => { 
+    if (!a.length) return []; 
+    let ret = []; 
+    for (let i = 0; i < a[0].length; i++) ret.push([]); 
+    for (let i = 0; i < a.length; i++) for (let j = 0; j < a[i].length; j++) 
+        ret[j].push(a[i][j]);
+    return ret;
+}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Zip": { (async () => { apply((a, b) => { let ret = []; for (let i = 0; i < Math.max(a.length, b.length); i++) ret.push([a[i], b[i]]); return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Array Make Unique": { (async () => { apply(a => Array.from(new Set(a)), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Intersect": { (async () => { apply((a, b) => a.filter(k => b.includes(k)), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Array Exclusion": { (async () => { apply((a, b) => a.filter(k => !b.includes(k)), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Array Union": { (async () => { apply((a, b) => [...a, ...b.filter(k => !a.includes(k))], SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Object Union": { (async () => { apply((a, b) => ({...a, ...b}), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Object Filter by Key": { (async () => { apply((o, op, n) => {
+    let fn = (a, b) => true;
+    switch (op) {
+        case "==": fn = (a, b) => a == b; break;
+        case "!=": fn = (a, b) => a != b; break;
+        case ">": fn = (a, b) => a > b; break;
+        case ">=": fn = (a, b) => a >= b; break;
+        case "<": fn = (a, b) => a < b; break;
+        case "<=": fn = (a, b) => a <= b; break;
+    }
+    let ret = {};
+    for (const k in o) if (fn(k, n)) ret[k] = o[k];
+}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
+case "Object Filter by Value": { (async () => { apply((o, op, n) => {
+    let fn = (a, b) => true;
+    switch (op) {
+        case "==": fn = (a, b) => a == b; break;
+        case "!=": fn = (a, b) => a != b; break;
+        case ">": fn = (a, b) => a > b; break;
+        case ">=": fn = (a, b) => a >= b; break;
+        case "<": fn = (a, b) => a < b; break;
+        case "<=": fn = (a, b) => a <= b; break;
+    }
+    let ret = {};
+    for (const k in o) if (fn(o[k], n)) ret[k] = o[k];
+}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
+case "Object Map Value": { (async () => { apply((o, op, n) => {
+    let fn = (a, n) => a;
+    switch (op) {
+        case "=": fn = (a, n) => n;
+        case "+=": fn = (a, n) => a + n;
+        case "-=": fn = (a, n) => a - n;
+        case "*=": fn = (a, n) => a * n;
+        case "/=": fn = (a, n) => a / n;
+        case "mod": fn = (a, n) => a % n;
+        case "div": fn = (a, n) => Math.floor(a / n);
+        case "concat": fn = (a, n) => String(a) + String(n);
+        case "&=": fn = (a, n) => a & n;
+        case "^=": fn = (a, n) => a ^ n;
+        case "|=": fn = (a, n) => a | n;
+        case "<<": fn = (a, n) => a << n;
+        case ">>": fn = (a, n) => a >> n;
+        case "sin": fn = (a, n) => Math.sin(a);
+        case "cos": fn = (a, n) => Math.cos(a);
+        case "tan": fn = (a, n) => Math.tan(a);
+        case "log10": fn = (a, n) => Math.log(a) / Math.log(10);
+        case "sqrt": fn = (a, n) => Math.sqrt(a);
+    }
+    let ret = {};
+    for (const k in o) ret[k] = fn(o[k]);
+}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
+case "Object Get Sorted Keys by Value": { (async () => { apply((o, asc) => {
+    let ret = Object.keys(o).sort((a, b) => {
+        if (o[a] === null) return -1; if (o[b] === null) return 1; 
+        if (typeof o[a] === "number") return o[a] - o[b];
+        return o[a].localeCompare(o[b]);
+    });
+    if (!asc) ret = ret.reverse();
+    return ret;
+}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.asc); })(); } break
+case "Get Random Element": { (async () => { apply(a => a[Math.floor(Math.random() * a.length)], SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Get Random Element From Weighted List": { (async () => { apply(a => {
+    let ret = Math.random() * Object.values(a).reduce((x, y) => x + y, 0);
+    for (let k in a) { if (ret < a[k]) return k; ret -= a[k]; }
+    return Object.keys(a).at(-1);
+}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "String Occurance": { (async () => { apply((str, sub) => {
+    let ret = 0, ptr = 0;
+    let oc = str.indexOf(sub, ptr);
+    while (oc !== -1) { ret++; ptr = oc + 1; oc = str.indexOf(sub, ptr); }
+    return ret;
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.str, SAMMIJSON.substr); })(); } break
+case "String Pad Start": { (async () => { apply((str, sub, len) => str.padStart(len, sub), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.str, SAMMIJSON.substr, SAMMIJSON.len); })(); } break
+case "String Pad End": { (async () => { apply((str, sub, len) => str.padEnd(len, sub), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.str, SAMMIJSON.substr, SAMMIJSON.len); })(); } break
+[insert_script]
+function apply(fn, output, btn, ...input) { let ret = fn(...input); console.log("ARGS:", ...input, "RETURN:", ret); if (output !== "") SAMMI.setVariable(output, ret, btn); }
+async function GetObject(o, btn) { return (await SAMMI.getVariable(o, btn)).value; }
+[insert_over]

@@ -1,0 +1,86 @@
+[extension_name]
+More Math
+[extension_info]
+exposes js math object from sammi (but in a user friendly way)
+[insert_external]
+[insert_command]
+SAMMI.extCommand('More Math: Constant: E', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: Pi', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: ln(10)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: ln(2)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: log10(e)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: log2(e)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: Sqrt(1/2)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Constant: Sqrt(2)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('More Math: Absolute Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Sign', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Arc Sine', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Arc Cosine', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Arc Tangent', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Hyperbolic Sine', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Hyperbolic Cosine', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Hyperbolic Tangent', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Hyperbolic Arc Sine', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Hyperbolic Arc Cosine', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Hyperbolic Arc Tangent', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Two-Argument Arc Tangent', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'y': ['Y Value', 15, ''], 'x': ['X Value', 15, ''] });
+SAMMI.extCommand('More Math: Cube Root', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Ceiling', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Floor', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Round', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Truncate', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Exponentiate', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'base': ['Base', 15, ''], 'exponent': ['Exponent', 15, ''] });
+SAMMI.extCommand('More Math: Get Hypotenuse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Side A', 15, ''], 'b': ['Side B', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Hypotenuse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Log', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''], 'base': ['Base', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Sum', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Max', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Variable/Number/\'String\'', 15, ''], 'b': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Max', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Min', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Variable/Number/\'String\'', 15, ''], 'b': ['Variable/Number/\'String\'', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Min', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Round to Decimal Point', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''], 'digit': ['Digits', 15, ''] });
+SAMMI.extCommand('More Math: Mod to Positive Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'denominator': ['Denominator', 15, ''], 'numerator': ['Numerator', 15, ''] });
+SAMMI.extCommand('More Math: Linear Interpolation', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Minimum Value', 15, ''], 'b': ['Maximum Value', 15, ''], 't': ['Amount (0-1)', 15, ''] });
+SAMMI.extCommand('More Math: Anti-Linear Interpolation', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'x': ['Value', 15, ''], 'a': ['Minimum Value', 15, ''], 'b': ['Maximum Value', 15, ''] });
+[insert_hook]
+case "More Math: Constant: E": { apply(() => Math.E, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: Pi": { apply(() => Math.PI, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: ln(10)": { apply(() => Math.LN10, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: ln(2)": { apply(() => Math.LN2, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: log10(e)": { apply(() => Math.LOG10E, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: log2(e)": { apply(() => Math.LOG2E, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: Sqrt(1/2)": { apply(() => Math.SQRT1_2, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Constant: Sqrt(2)": { apply(() => Math.SQRT2, SAMMIJSON.output, SAMMIJSON.FromButton); } break
+case "More Math: Absolute Value": { apply(Math.abs, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Sign": { apply(Math.sign, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Arc Sine": { apply(Math.asin, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Arc Cosine": { apply(Math.acos, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Arc Tangent": { apply(Math.atan, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Hyperbolic Sine": { apply(Math.sinh, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Hyperbolic Cosine": { apply(Math.cosh, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Hyperbolic Tangent": { apply(Math.tanh, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Hyperbolic Arc Sine": { apply(Math.asinh, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Hyperbolic Arc Cosine": { apply(Math.acosh, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Hyperbolic Arc Tangent": { apply(Math.atanh, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Two-Argument Arc Tangent": { apply(Math.atan2, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.y, SAMMIJSON.x); } break
+case "More Math: Cube Root": { apply(Math.cbrt, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Ceiling": { apply(Math.ceil, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Floor": { apply(Math.floor, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Round": { apply(Math.round, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Truncate": { apply(Math.trunc, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "More Math: Exponentiate": { apply(Math.pow, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.base, SAMMIJSON.exponent); } break
+case "More Math: Get Hypotenuse": { apply(Math.hypot, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b); } break
+case "More Math: Get Array Hypotenuse": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.hypot, SAMMIJSON.output, SAMMIJSON.FromButton, ...arr.value)); } break
+case "More Math: Log": { apply((a, b) => Math.log(a) / Math.log(b), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.base ?? Math.E); } break
+case "More Math: Get Array Sum": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.sumPrecise, SAMMIJSON.output, SAMMIJSON.FromButton, arr.value)); } break
+case "More Math: Get Max": { apply(Math.max, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b); } break
+case "More Math: Get Array Max": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.max, SAMMIJSON.output, SAMMIJSON.FromButton, ...arr.value)); } break
+case "More Math: Get Min": { apply(Math.min, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b); } break
+case "More Math: Get Array Min": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.min, SAMMIJSON.output, SAMMIJSON.FromButton, ...arr.value)); } break
+case "More Math: Round to Decimal Point": { apply((n, a) => Math.round(n * Math.pow(10, a)) / Math.pow(10, a), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.digit ?? 6); } break
+case "More Math: Mod to Positive Value": { apply((n, a) => ((n % a) + a) % a, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.denominator, SAMMIJSON.numerator); } break
+case "More Math: Linear Interpolation": { apply((a, b, t) => (b - a) * t + a, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b, SAMMIJSON.t); } break
+case "More Math: Anti-Linear Interpolation": { apply((x, a, b) => a === b ? 0.5 : ((b - x) / (a - b)), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.x, SAMMIJSON.a, SAMMIJSON.b); } break
+[insert_script]
+function apply(fn, output, btn, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn); }
+[insert_over]

@@ -1,0 +1,11 @@
+[extension_name]
+JS Eval
+[extension_info]
+exposes js eval from sammi
+[insert_external]
+[insert_command]
+SAMMI.extCommand('JavaScript Eval', 3355443, 52, { 'input': ['Input', 14, ''], 'outputVariable': ['Save Variable As', 14, ''] });
+[insert_hook]
+case "JavaScript Eval": { if (outputVariable !== "") SAMMI.setVariable(SAMMIJSON.outputVariable, eval(SAMMIJSON.input), SAMMIJSON.FromButton); } break
+[insert_script]
+[insert_over]

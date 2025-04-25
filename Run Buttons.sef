@@ -1,0 +1,230 @@
+[extension_name]
+Run Buttons
+[extension_info]
+run buttons as a command (but for free also more of it)
+[insert_external]
+[insert_command]
+SAMMI.extCommand('Get Buttons by Deck', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'deck': ['Deck', 33, 0] });
+SAMMI.extCommand('Get Buttons by ID', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Get Buttons by Label', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Get Buttons by Group', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'condition': ['Button Group', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Get Buttons by Color', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'condition': ['Button Color', 17, ''], 'deck': ['Deck (blank for all)', 14, ''] });
+SAMMI.extCommand('Run Buttons by ID List', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'arr': ['Button ID Array Name', 14, ''] });
+SAMMI.extCommand('Run Buttons by Deck', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'deck': ['Deck', 33, 0] });
+SAMMI.extCommand('Run Buttons by ID', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Run Buttons by Label', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Run Buttons by Group', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Group', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Run Buttons by Color', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Color', 17, ''], 'deck': ['Deck (blank for all)', 14, ''] });
+SAMMI.extCommand('Init Buttons by ID List', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Button ID Array Name', 14, ''] });
+SAMMI.extCommand('Init Buttons by Deck', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'deck': ['Deck', 33, 0] });
+SAMMI.extCommand('Init Buttons by ID', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons reinitialized)', 14, ''], 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Init Buttons by Label', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons reinitialized)', 14, ''], 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Init Buttons by Group', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons reinitialized)', 14, ''], 'condition': ['Button Group', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Init Buttons by Color', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons reinitialized)', 14, ''], 'condition': ['Button Color', 17, ''], 'deck': ['Deck (blank for all)', 14, ''] });
+SAMMI.extCommand('Stop Buttons by ID List', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Button ID Array Name', 14, ''] });
+SAMMI.extCommand('Stop Buttons by Deck', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'deck': ['Deck', 33, 0] });
+SAMMI.extCommand('Stop Buttons by ID', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''], 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Stop Buttons by Label', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''], 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Stop Buttons by Group', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''], 'condition': ['Button Group', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Stop Buttons by Color', 3355443, 52, { 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''], 'condition': ['Button Color', 17, ''], 'deck': ['Deck (blank for all)', 14, ''] });
+SAMMI.extCommand('Randomly Buttons by ID List', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'arr': ['Button ID Array Name', 14, ''] });
+SAMMI.extCommand('Randomly Run Buttons by Deck', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'deck': ['Deck', 33, 0] });
+SAMMI.extCommand('Randomly Run Buttons by ID', 3355443, 52, { 'output': ['Save Variable As (ID of button ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Randomly Run Buttons by Label', 3355443, 52, { 'output': ['Save Variable As (ID of button ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Randomly Run Buttons by Group', 3355443, 52, { 'output': ['Save Variable As (ID of button ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Group', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']] });
+SAMMI.extCommand('Randomly Run Buttons by Color', 3355443, 52, { 'output': ['Save Variable As (ID of button ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Color', 17, ''], 'deck': ['Deck (blank for all)', 14, ''] });
+SAMMI.extCommand('Randomly Run Button With Weighted List', 3355443, 52, { 'output': ['Save Variable As (ID of button ran)', 14, ''], 'data': ['Trigger Data Object', 14, ''], 'object': ['Weighted List (Object/Key: ID of button, Value: Weight)', 14, ''] });
+[insert_hook]
+case "Get Buttons by Deck": { (async () => { 
+    const list = (await SAMMI.getDeckList()).DeckList;
+    for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) 
+        save(SAMMIJSON.output, (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id), SAMMIJSON.FromButton);
+})(); } break
+case "Run Buttons by Deck": { (async () => { 
+    const list = (await SAMMI.getDeckList()).DeckList;
+    for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
+        const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
+        save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+        RunButtons(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
+    }
+})(); } break
+case "Init Buttons by Deck": { (async () => { 
+    const list = (await SAMMI.getDeckList()).DeckList;
+    for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
+        const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
+        save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+        InitButtons(buttons);
+    }
+})(); } break
+case "Stop Buttons by Deck": { (async () => { 
+    const list = (await SAMMI.getDeckList()).DeckList;
+    for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
+        const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
+        save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+        StopButtons(buttons);
+    }
+})(); } break
+case "Randomly Run Buttons by Deck": { (async () => { 
+    const list = (await SAMMI.getDeckList()).DeckList;
+    for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
+        const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
+        const button = buttons[Math.floor(Math.random() * buttons.length)]
+        save(SAMMIJSON.output, button, SAMMIJSON.FromButton);
+        RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+    }
+})(); } break
+case "Get Buttons by ID": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+})(); } break
+case "Run Buttons by ID": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    RunButtons(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Init Buttons by ID": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); InitButtons(buttons);
+})(); } break
+case "Stop Buttons by ID": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); StopButtons(buttons);
+})(); } break
+case "Randomly Run Buttons by ID": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
+    const button = buttons[Math.floor(Math.random() * buttons.length)]
+    RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Get Buttons by Label": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+})(); } break
+case "Run Buttons by Label": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    RunButtons(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Init Buttons by Label": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); InitButtons(buttons);
+})(); } break
+case "Stop Buttons by Label": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); StopButtons(buttons);
+})(); } break
+case "Randomly Run Buttons by Label": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
+    const button = buttons[Math.floor(Math.random() * buttons.length)]
+    RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Get Buttons by Group": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+})(); } break
+case "Run Buttons by Group": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    RunButtons(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Init Buttons by Group": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); InitButtons(buttons);
+})(); } break
+case "Stop Buttons by Group": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); StopButtons(buttons);
+})(); } break
+case "Randomly Run Buttons by Group": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => GetMode(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
+    const button = buttons[Math.floor(Math.random() * buttons.length)]
+    RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Get Buttons by Color": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+})(); } break
+case "Run Buttons by Color": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    RunButtons(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Init Buttons by Color": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); InitButtons(buttons);
+})(); } break
+case "Stop Buttons by Color": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); StopButtons(buttons);
+})(); } break
+case "Randomly Run Buttons by Color": { (async () => { 
+    const buttons = (await GetButtons(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
+    const button = buttons[Math.floor(Math.random() * buttons.length)]
+    RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Run Buttons by ID List": { (async () => { 
+    const buttons = await GetObject(SAMMIJSON.arr, SAMMIJSON.FromButton);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    RunButtons(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Init Buttons by ID List": { (async () => { 
+    const buttons = await GetObject(SAMMIJSON.arr, SAMMIJSON.FromButton);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); InitButtons(buttons);
+})(); } break
+case "Stop Buttons by ID List": { (async () => { 
+    const buttons = await GetObject(SAMMIJSON.arr, SAMMIJSON.FromButton);
+    save(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); StopButtons(buttons);
+})(); } break
+case "Randomly Run Buttons by ID List": { (async () => {
+    const buttons = await GetObject(SAMMIJSON.arr, SAMMIJSON.FromButton);
+    const button = buttons[Math.floor(Math.random() * buttons.length)]
+    RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+case "Randomly Run Button With Weighted List": { (async () => {
+    const a = await GetObject(SAMMIJSON.object, SAMMIJSON.FromButton);
+    let ret = Math.random() * Object.values(a).reduce((x, y) => x + y, 0);
+    for (let k in a) { if (ret < a[k]) return k; ret -= a[k]; }
+    const button = Object.keys(a).at(-1);
+    RunButtons([button], SAMMIJSON.FromButton, SAMMIJSON.data);
+})(); } break
+[insert_script]
+async function GetButtons(deck) {
+    const list = (await SAMMI.getDeckList()).DeckList; let res = {};
+    for (let i = 0; i < list.length; i += 3) res[list[i]] = (await SAMMI.getDeck(list[i + 1])).Deck.button_list;
+    if (deck !== "") return res[deck] ?? [];
+    let ret = [];
+    for (let k in res) ret = [...ret, ...res[k]];
+    return ret;
+}
+async function RunButtons(buttons, from, data) {
+    let o = data !== "" ? await GetObject(data, from) : {};
+    for (const id of buttons) {
+        for (const k in o) await SAMMI.setVariable(k, o[k], id);
+        await SAMMI.triggerButton(id);
+    }
+}
+async function InitButtons(buttons) {
+    for (const id of buttons) {
+        await SAMMI.setVariable("id", id, "RunButtons_Init");
+        await SAMMI.triggerButton("RunButtons_Init");
+    }
+}
+async function StopButtons(buttons) {
+    for (const id of buttons) {
+        await SAMMI.setVariable("id", id, "RunButtons_Stop");
+        await SAMMI.triggerButton("RunButtons_Stop");
+    }
+}
+function GetMode(mode) {
+    let fn = (a, c) => true;
+    switch (mode) {
+        case 'Exact Match': fn = (a, c) => a === c; break;
+        case 'Starts With': fn = (a, c) => a.startsWith(c); break;
+        case 'Ends With': fn = (a, c) => a.endsWith(c); break;
+        case 'Includes': fn = (a, c) => a.includes(c); break;
+    }
+    return fn;
+}
+function save(output, input, btn) {  console.log("SAVE:", output, input, btn); if (output !== "") SAMMI.setVariable(output, input, btn); }
+async function GetObject(o, btn) { return (await SAMMI.getVariable(o, btn)).value; }
+[insert_over]
+{ "deck_data": "{ \"background_color\": 0.0, \"on\": true, \"grid_y\": 2.0, \"snap_grid\": true, \"lb_version\": \"2025.1.1\", \"background_image\": \"\", \"sammi_version\": \"2025.1.1\", \"adaptive_resizing\": true, \"unique_id\": \"20250425084019318761006\", \"button_list\": [ { \"color\": 0.0, \"persistent\": true, \"text\": \"Reinitialize Variables\", \"release_duration\": 0.0, \"queueable\": false, \"command_list\": [ { \"cmd\": 294.0, \"obsid\": \"Main\", \"pos\": 0.0, \"vis\": true, \"ms\": 0.0, \"sel\": false, \"dis\": false, \"xpan\": 0.0, \"b0\": \"\\\/$id$\\\/\" } ], \"press_type\": 0.0, \"x\": 0.0, \"is_transparent\": false, \"border\": 2.0, \"image\": \"\", \"triggers\": [ ], \"group_id\": \"\", \"overlappable\": false, \"init_variable\": \"\", \"deck\": 2.0, \"width\": 1.0, \"button_id\": \"RunButtons_Init\", \"button_duration\": 0.0, \"y\": 0.0, \"switch_deck\": \"\", \"height\": 0.5, \"release_list\": [ ], \"functions\": 65.0, \"stretch\": false }, { \"color\": 0.0, \"persistent\": true, \"text\": \"Stop Button\", \"release_duration\": 0.0, \"queueable\": false, \"command_list\": [ { \"cmd\": 133.0, \"v1\": 1.0, \"obsid\": \"Main\", \"pos\": 0.0, \"vis\": true, \"ms\": 0.0, \"sel\": false, \"dis\": false, \"xpan\": 0.0, \"b0\": \"\\\/$id$\\\/\", \"v0\": 1.0, \"v2\": 0.0 } ], \"press_type\": 0.0, \"x\": 0.0, \"is_transparent\": false, \"border\": 2.0, \"image\": \"\", \"triggers\": [ ], \"group_id\": \"\", \"overlappable\": false, \"init_variable\": \"\", \"deck\": 2.0, \"width\": 1.0, \"button_id\": \"RunButtons_Stop\", \"button_duration\": 0.0, \"y\": 0.5, \"switch_deck\": \"\", \"height\": 0.5, \"release_list\": [ ], \"functions\": 65, \"stretch\": false } ], \"deck_name\": \"Run Buttons\", \"grid_x\": 1.0, \"stretch\": false }", "unique_id": "20250425084019318761006", "include_image": { } }
