@@ -31,13 +31,13 @@ SAMMI.extCommand('More Math: Round', 3355443, 52, { 'output': ['Save Variable As
 SAMMI.extCommand('More Math: Truncate', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''] });
 SAMMI.extCommand('More Math: Exponentiate', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'base': ['Base', 15, ''], 'exponent': ['Exponent', 15, ''] });
 SAMMI.extCommand('More Math: Get Hypotenuse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Side A', 15, ''], 'b': ['Side B', 15, ''] });
-SAMMI.extCommand('More Math: Get Array Hypotenuse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Hypotenuse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 14, ''] });
 SAMMI.extCommand('More Math: Log', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''], 'base': ['Base', 15, ''] });
-SAMMI.extCommand('More Math: Get Array Sum', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Sum', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 14, ''] });
 SAMMI.extCommand('More Math: Max', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Variable/Number/\'String\'', 15, ''], 'b': ['Variable/Number/\'String\'', 15, ''] });
-SAMMI.extCommand('More Math: Get Array Max', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Max', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 14, ''] });
 SAMMI.extCommand('More Math: Min', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Variable/Number/\'String\'', 15, ''], 'b': ['Variable/Number/\'String\'', 15, ''] });
-SAMMI.extCommand('More Math: Get Array Min', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 15, ''] });
+SAMMI.extCommand('More Math: Get Array Min', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'arr': ['Array Variable', 14, ''] });
 SAMMI.extCommand('More Math: Round to Decimal Point', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Variable/Number/\'String\'', 15, ''], 'digit': ['Digits', 15, ''] });
 SAMMI.extCommand('More Math: Mod to Positive Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'denominator': ['Denominator', 15, ''], 'numerator': ['Numerator', 15, ''] });
 SAMMI.extCommand('More Math: Linear Interpolation', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Minimum Value', 15, ''], 'b': ['Maximum Value', 15, ''], 't': ['Amount (0-1)', 15, ''] });
