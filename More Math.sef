@@ -72,7 +72,7 @@ case "More Math: Exponentiate": { apply(Math.pow, SAMMIJSON.output, SAMMIJSON.Fr
 case "More Math: Get Hypotenuse": { apply(Math.hypot, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b); } break
 case "More Math: Get Array Hypotenuse": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.hypot, SAMMIJSON.output, SAMMIJSON.FromButton, ...arr.value)); } break
 case "More Math: Log": { apply((a, b) => Math.log(a) / Math.log(b), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.base ?? Math.E); } break
-case "More Math: Get Array Sum": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.sumPrecise, SAMMIJSON.output, SAMMIJSON.FromButton, arr.value)); } break
+case "More Math: Get Array Sum": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(a => a.reduce((a, b) => a + b, 0), SAMMIJSON.output, SAMMIJSON.FromButton, arr.value)); } break
 case "More Math: Get Max": { apply(Math.max, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b); } break
 case "More Math: Get Array Max": { SAMMI.getVariable(SAMMIJSON.arr, SAMMIJSON.FromButton).then(arr => apply(Math.max, SAMMIJSON.output, SAMMIJSON.FromButton, ...arr.value)); } break
 case "More Math: Get Min": { apply(Math.min, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.a, SAMMIJSON.b); } break
