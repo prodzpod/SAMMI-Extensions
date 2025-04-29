@@ -17,7 +17,7 @@ function Init(output, btn, url) {
     const id = PROD_WEBSOCKET_WEBSOCKETS.length;
     ws.addEventListener("open", () => SAMMI.triggerExt('Websocket Open', { websocket: id }));
     ws.addEventListener("close", () => SAMMI.triggerExt('Websocket Close', { websocket: id }));
-    ws.addEventListener("message", m => SAMMI.triggerExt('Websocket Message', { websocket: id, message: e }));
+    ws.addEventListener("message", m => SAMMI.triggerExt('Websocket Message', { websocket: id, message: m.data }));
     ws.addEventListener("error", e => SAMMI.triggerExt('Websocket Error', { websocket: id, error: e }));
     if (output !== "") SAMMI.setVariable(output, id, btn); 
 }
