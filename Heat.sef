@@ -4,7 +4,7 @@ Heat
 clickmap but free (and works)
 [insert_external]
 [insert_command]
-SAMMI.extCommand('Add Coordinate', 3355443, 52, { 
+SAMMI.extCommand('Heat: Add Coordinate', 3355443, 52, { 
     'name': ['Name', 14, ''], 
     'x': ['X Position', 15, 0],
     'y': ['Y Position', 15, 0],
@@ -12,19 +12,19 @@ SAMMI.extCommand('Add Coordinate', 3355443, 52, {
     'w': ['Width', 15, 1920],
     'h': ['Height', 15, 1080]
 });
-SAMMI.extCommand('Add Source', 3355443, 52, { 
+SAMMI.extCommand('Heat: Add Source', 3355443, 52, { 
     'name': ['Name', 14, ''], 
     'scene': ['Scene', 4, ''],
     'source': ['Source', 5, ''],
     'z': ['Depth', 15, 0]
 });
-SAMMI.extCommand('Remove Clickmap', 3355443, 52, { 
+SAMMI.extCommand('Heat: Remove Clickmap', 3355443, 52, { 
     'name': ['Name', 14, '']
 });
 [insert_hook]
-case "Add Coordinate": { SetButton("HeatSAMMIAddNew", { name: SAMMIJSON.name, x: SAMMIJSON.x, y: SAMMIJSON.y, z: SAMMIJSON.z, w: SAMMIJSON.w, h: SAMMIJSON.h }); } break
-case "Add Source": { SetButton("HeatSAMMIAddSource", { name: SAMMIJSON.name, scene: SAMMIJSON.scene, source: SAMMIJSON.source, z: SAMMIJSON.z }); } break
-case "Remove Clickmap": { SetButton("HeatSAMMIRemoveSource", { name: SAMMIJSON.name }); } break
+case "Heat: Add Coordinate": { SetButton("HeatSAMMIAddNew", { name: SAMMIJSON.name, x: SAMMIJSON.x, y: SAMMIJSON.y, z: SAMMIJSON.z, w: SAMMIJSON.w, h: SAMMIJSON.h }); } break
+case "Heat: Add Source": { SetButton("HeatSAMMIAddSource", { name: SAMMIJSON.name, scene: SAMMIJSON.scene, source: SAMMIJSON.source, z: SAMMIJSON.z }); } break
+case "Heat: Remove Clickmap": { SetButton("HeatSAMMIRemoveSource", { name: SAMMIJSON.name }); } break
 [insert_script]
 async function SetButton(button, data) {
     for (const k in data) await SAMMI.setVariable(k, data[k], button);
