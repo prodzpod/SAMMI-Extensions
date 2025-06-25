@@ -4,8 +4,12 @@ JS Eval
 exposes js eval from sammi
 [insert_external]
 [insert_command]
-SAMMI.extCommand('JavaScript Eval', 3355443, 52, { 'input': ['Input', 14, ''], 'outputVariable': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('JavaScript Eval', 3355443, 52, { 'input': ['Input', 0, ''], 'outputVariable': ['Save Variable As', 14, ''] });
 [insert_hook]
-case "JavaScript Eval": { if (outputVariable !== "") SAMMI.setVariable(SAMMIJSON.outputVariable, eval(SAMMIJSON.input), SAMMIJSON.FromButton); } break
+case "JavaScript Eval": { 
+    if (SAMMIJSON.outputVariable !== "") 
+        SAMMI.setVariable(SAMMIJSON.outputVariable, eval(SAMMIJSON.input), SAMMIJSON.FromButton); 
+    else eval(SAMMIJSON.input); 
+} break
 [insert_script]
 [insert_over]

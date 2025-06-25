@@ -14,7 +14,7 @@ case "Source Change Image Path": { Button(SAMMIJSON.source, SAMMIJSON.path, "Cha
 case "Source Change Media Path": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeMediaPath"); } break
 case "Source Change Browser URL": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeBrowserURL"); } break
 case "Source Change Refresh Browser": { Button(SAMMIJSON.source, "", "RefreshBrowser"); } break
-case "Source Change Change Color": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeColor"); } break
+case "Source Change Color": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeColor"); } break
 [insert_script]
 async function Button(source, path, id) {
     await SAMMI.setVariable("source", source, "OBSMediaControl_" + id); 
