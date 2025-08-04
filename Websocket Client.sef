@@ -4,7 +4,7 @@ Websocket Client
 connect to websocket from sammi (but for free)
 [insert_external]
 [insert_command]
-SAMMI.extCommand('Connect to Websocket', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'url': ['URL', 14, ''] });
+SAMMI.extCommand('Connect to Websocket', 3355443, 52, { 'url': ['URL', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Send to Websocket', 3355443, 52, { 'ws': ['Websocket', 15, ''], 'input': ['Input', 14, ''] });
 [insert_hook]
 case "Connect to Websocket": { Init(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.url); } break

@@ -4,26 +4,26 @@ More Collection
 array/object util functions
 [insert_external]
 [insert_command]
-SAMMI.extCommand('Object Get Entries', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''] });
-SAMMI.extCommand('Entries to Object', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Entries', 14, ''] });
-SAMMI.extCommand('Array Reverse', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''] });
-SAMMI.extCommand('Array Flatten', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''], 'doall': ['Flatten All Layer', 2, false] });
-SAMMI.extCommand('Array Transpose', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input 2D Array', 14, ''] });
-SAMMI.extCommand('Array Zip', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
-SAMMI.extCommand('Array Make Unique', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''] });
-SAMMI.extCommand('Array Intersect', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
-SAMMI.extCommand('Array Union', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
-SAMMI.extCommand('Object Union', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Object 1', 14, ''], 'b': ['Input Object 2', 14, ''] });
-SAMMI.extCommand('Array Exclusion', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''] });
-SAMMI.extCommand('Object Filter by Key', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''] });
-SAMMI.extCommand('Object Filter by Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''] });
-SAMMI.extCommand('Object Map Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'operator': ['Operator', 9, ''], 'number': ['Variable/Number', 15, ''] });
-SAMMI.extCommand('Object Get Sorted Keys by Value', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object', 14, ''], 'asc': ['Ascending', 2, false] });
-SAMMI.extCommand('Get Random Element', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Array', 14, ''] });
-SAMMI.extCommand('Get Random Element From Weighted List', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'input': ['Input Object(Key: Output, Value: Weight)', 14, ''] });
-SAMMI.extCommand('String Occurance', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'str': ['Input String', 14, ''], 'substr': ['Input Pattern', 14, ''] });
-SAMMI.extCommand('String Pad Start', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, '0'], 'len': ['Input Pad Length', 15, 1] });
-SAMMI.extCommand('String Pad End', 3355443, 52, { 'output': ['Save Variable As', 14, ''], 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, ' '], 'len': ['Input Pad Length', 15, 1] });
+SAMMI.extCommand('Object Get Entries', 3355443, 52, { 'input': ['Input Object', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Entries to Object', 3355443, 52, { 'input': ['Input Entries', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Reverse', 3355443, 52, { 'input': ['Input Array', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Flatten', 3355443, 52, { 'input': ['Input Array', 14, ''], 'doall': ['Flatten All Layer', 2, false], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Transpose', 3355443, 52, { 'input': ['Input 2D Array', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Zip', 3355443, 52, { 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Make Unique', 3355443, 52, { 'input': ['Input Array', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Intersect', 3355443, 52, { 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Union', 3355443, 52, { 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Union', 3355443, 52, { 'a': ['Input Object 1', 14, ''], 'b': ['Input Object 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Array Exclusion', 3355443, 52, { 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Filter by Key', 3355443, 52, { 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Filter by Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Map Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'operator': ['Operator', 9, ''], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Get Sorted Keys by Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'asc': ['Ascending', 2, false], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Get Random Element', 3355443, 52, { 'input': ['Input Array', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Get Random Element From Weighted List', 3355443, 52, { 'input': ['Input Object(Key: Output, Value: Weight)', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('String Occurance', 3355443, 52, { 'str': ['Input String', 14, ''], 'substr': ['Input Pattern', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('String Pad Start', 3355443, 52, { 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, '0'], 'len': ['Input Pad Length', 15, 1], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('String Pad End', 3355443, 52, { 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, ' '], 'len': ['Input Pad Length', 15, 1], 'output': ['Save Variable As', 14, ''] });
 [insert_hook]
 case "Object Get Entries": { (async () => { apply(Object.entries, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
 case "Entries to Object": { (async () => { apply(kvpair => { let ret = {}; for (let kv of kvpair) ret[kv[0]] = kv[1]; return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break

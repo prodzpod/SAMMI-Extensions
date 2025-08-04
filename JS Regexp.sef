@@ -5,11 +5,11 @@ exposes js regexp object from sammi (but for free)
 [insert_external]
 [insert_command]
 SAMMI.extCommand('Regular Expression', 3355443, 52, { 
-    'output': ['Save Variable As', 14, ''],  
     'mode': ['Store Mode', 19, 'Success', null, ['Success', 'Match', 'Capture Array', 'Index', 'Capture Index Array']], 
     'string': ['Input String', 14, ''],
     'input': ['Input Pattern', 14, ''],
-    'flag': ['Flag', 14, ''] 
+    'flag': ['Flag', 14, ''],
+    'output': ['Save Variable As', 14, '']
 });
 [insert_hook]
 case "Regular Expression": { Regex(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.mode, SAMMIJSON.string, SAMMIJSON.input, SAMMIJSON.flag); } break
