@@ -1,0 +1,234 @@
+[extension_name]
+Time with Milliseconds
+[extension_info]
+more customizable time
+[insert_external]
+[insert_command]
+SAMMI.extCommand('Get Date/Time with Milliseconds', 3355443, 52, { 'input': ['Input', 14, 'now'], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Format Time with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'DDDD:hh:mm:ss.sss'], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Format Date with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'YYYY-MM-DDThh:mm:ss.ssssZZZZ'], 'output': ['Save Variable As', 14, ''] });
+[insert_hook]
+case "Get Date/Time with Milliseconds": { apply(time, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "Format Time with Milliseconds": { apply((i, f) => formatTime(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
+case "Format Date with Milliseconds": { apply((i, f) => formatDate(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
+[insert_script]
+function apply(fn, output, btn, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn); }
+//* #REGION time operation
+// dealing with timezones sucks
+const nullish = o => ([undefined, null, ""].includes(o) || Number.isNaN(o) || (Array.isArray(o) && o.length === 0) || (typeof o === "object" && Object.keys(o).length === 0)) ? null : o;
+const lastFindIndex = (arr, fn) => { for (let i = arr.length - 1; i >= 0; i--) if (fn(arr[i], i, arr)) return i; return -1; }
+const zeroPad = (o, zeroes) => {
+    o = nullish(o); if (!zeroes) zeroes = 0;
+    if (o === null) return "0".repeat(zeroes);
+    switch (typeof o) {
+        case "string": return o.padStart(zeroes, "0");
+        case "boolean": return (o ? "1" : "0").padStart(zeroes, "0");
+        case "number":
+            o = Math2.prec(o, 3);
+            return (Math.sign(o) !== -1 ? "" : "-") + 
+                Math.abs(o).toString().padStart(zeroes, "0");
+    }
+    throw `${o} could not be zero padded`;
+}
+const occurance = (str, sub) => {
+    let ret = 0, ptr = 0;
+    let oc = str.indexOf(sub, ptr);
+    while (oc !== -1) { ret++; ptr = oc + 1; oc = str.indexOf(sub, ptr); }
+    return ret;
+}
+const time = o => {
+    if (Number.isNaN(o)) return null;
+    o = nullish(o);
+    if (o === null) return Date.now();
+    switch (typeof o) {
+        case "bigint": return Number(o);
+        case "number": return o;
+        case "boolean": return o ? Date.now() : 0;
+        case "string":
+            if (o.toLowerCase().trim() === "now") return Date.now();
+            o = o
+                .replace(/(^|[^a-zA-Z])T($|[^a-zA-Z])/g, "$1$2")
+                .replace(/(^|[^a-zA-Z])t($|[^a-zA-Z])/g, "$1$2")
+                .replace(/(^|[^a-zA-Z])Z($|[^a-zA-Z])/g, "$1$2")
+                .replace(/(^|[^a-zA-Z])z($|[^a-zA-Z])/g, "$1$2");
+            if (occurance(o, ":") === 3) o = `1970-01-` + o.replace(":", " ");
+            for (const str of [o, `1970-01-01 ${o}`, `1970 ${o}`]) {
+                const date = new Date(str + " GMT+00:00").getTime();
+                if (!Number.isNaN(date)) return date;
+            }
+            return 0;
+    }
+    if (o instanceof Date) return !Number.isNaN(o.getTime()) ? o.getTime() : null;
+    if (Array.isArray(o)) {
+        switch (o.length) {
+            case 1: o = [...o, 1, 1, 0, 0, 0, 0]; break;
+            case 2: o = [1970, 1, 1, ...o, 0, 0]; break;
+            case 3: o = [1970, 1, 1, ...o, 0]; break;
+            case 4: o = [1970, ...o, 0, 0]; break;
+            case 5: o = [1970, ...o, 0]; break;
+            case 6: o = [...o, 0]; break;
+            default: o = o.slice(0, 7);
+        } o[1] -= 1;
+        const date = new Date(...o).getTime();
+        return !Number.isNaN(date) ? date - (new Date().getTimezoneOffset() * 60000) : null;
+    }
+    return null;
+}
+/**
+ ** formatDate(a, [b, format=ISO, cutFront=true])
+ ** YY: 20[24] * YYY: [-10](1960) * YYYY: [1960]
+ ** M: [5] * MM: [05] * MMM: [Jan] * MMM: [January]
+ ** D: [2] * DD: [02] * DDD: [57](days) * DDDD: [7381](days since 1970-01-01)
+ ** W: week [3] * WW: [W]ed * WWW: [Wed] * WWWW: [Wednesday]
+ ** h: [14] * hh: [14] * hhh: [134] (including days)
+ ** H: [2](14) * HH: [02](14) * HHH: [PM]
+ ** m: [4] * mm: [04]
+ ** s: [6] * ss: [06] * sss: [6.4]00 * ssss: 6.[400]
+ ** Z: UTC+[0] * ZZ: UTC[+0] * ZZZ: [GMT] * ZZZZ: UTC[+00:00]
+ ** %: interpret next replacekey as literal * %%: % * !: split two replacekeys
+ */ // ISO format by default 
+const formatTime = (...args) => {
+    const SECOND = 1000n, MINUTE = SECOND * 60n, HOUR = MINUTE * 60n, DAY = HOUR * 24n, 
+        YEAR = DAY * 365n, FOUR_YEAR = YEAR * 4n + DAY, CENTURY = FOUR_YEAR * 25n - DAY,
+        FOUR_CENTURY = CENTURY * 4n + DAY, YEAR_0 = 946684800000n - (FOUR_CENTURY * 5n);
+    let a = BigInt(time()), b = BigInt(time()), format = "DDDD:hh:mm:sss", cutFront = true;
+    var _idx = lastFindIndex(args, x => typeof x === "boolean"); if (_idx !== -1) { cutFront = args[_idx]; args.splice(_idx, 1); }
+    var _idx = lastFindIndex(args, x => typeof x === "string"); if (_idx !== -1) { format = args[_idx]; args.splice(_idx, 1); }
+    if (args[0] !== undefined) a = BigInt(time(args[0])); if (args[1] !== undefined) b = BigInt(time(args[1]));
+    let date = (args[1] === undefined) ? (BigMath.abs(a) > YEAR ? BigInt(time()) - a : a) : a - b;
+    return formatDate(date, format, cutFront);
+}
+const formatDate = (...args) => {
+    const SECOND = 1000n, MINUTE = SECOND * 60n, HOUR = MINUTE * 60n, DAY = HOUR * 24n, 
+        YEAR = DAY * 365n, FOUR_YEAR = YEAR * 4n + DAY, CENTURY = FOUR_YEAR * 25n - DAY,
+        FOUR_CENTURY = CENTURY * 4n + DAY, YEAR_0 = 946684800000n - (FOUR_CENTURY * 5n);
+    let a = BigInt(time()), b = 0n, format = "YYYY-MM-DDThh:mm:ss.ssssZZZZ", cutFront = false;
+    var _idx = lastFindIndex(args, x => typeof x === "boolean"); if (_idx !== -1) { cutFront = args[_idx]; args.splice(_idx, 1); }
+    var _idx = lastFindIndex(args, x => typeof x === "string"); if (_idx !== -1) { format = args[_idx]; args.splice(_idx, 1); }
+    if (args[0] !== undefined) a = BigInt(time(args[0])); if (args[1] !== undefined) b = BigInt(time(args[1])); const date = a - b;
+    const isDate = /(?:^|[^%])(?:%%)*YYYY/.test(format); 
+    var _remaining = date - YEAR_0;
+    const _FOUR_CENTURY = Number(BigMath.div(_remaining, FOUR_CENTURY)); _remaining = BigMath.posmod(_remaining, FOUR_CENTURY);
+    let _CENTURY = 0; if (_remaining >= (CENTURY + DAY)) { _CENTURY += 1; _remaining -= CENTURY + DAY; }
+    _CENTURY += Number(_remaining / CENTURY) + (4 * _FOUR_CENTURY); _remaining %= CENTURY;
+    let _YEAR = 0; 
+    if (_CENTURY % 4 !== 0 && _remaining >= (FOUR_YEAR - DAY)) { _YEAR += 4; _remaining -= FOUR_YEAR - DAY; }
+    _YEAR += 4 * Number(_remaining / FOUR_YEAR); _remaining %= FOUR_YEAR;
+    if (_YEAR !== 0 || _CENTURY % 4 === 0) { // check for leapyear
+        if (_remaining >= (YEAR + DAY)) { 
+            _YEAR++; _remaining -= YEAR + DAY; 
+            _YEAR += Number(_remaining / YEAR); _remaining %= YEAR; 
+        }
+    } else { _YEAR += Number(_remaining / YEAR); _remaining %= YEAR; }
+    _YEAR += 100 * _CENTURY;
+    const isLeapYear = (_YEAR % 4 === 0) && (_YEAR % 100 !== 0 || _YEAR % 400 === 0);
+    const year = isDate ? _YEAR : _YEAR - (_YEAR >= 1970 ? 1970 : 1969);
+    const totalDays = isDate ? BigMath.div(date, DAY) : date / DAY;
+    if (!isDate) _remaining = date % (isLeapYear ? (YEAR + DAY) : YEAR);
+    const days = Number(_remaining / DAY); _remaining = (days < 0 ? -_remaining : _remaining) % DAY;
+    var _days = days, _month = isDate ? 1 : 0;
+    for (let m of [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]) {
+        if (_days < m) break;
+        _days -= m;
+        _month++;
+    }
+    const day = _days + (isDate ? 1 : 0); const month = _month;
+    const hours = Number(_remaining / HOUR); _remaining = (hours < 0 ? -_remaining : _remaining) % HOUR;
+    const minutes = Number(_remaining / MINUTE); _remaining = (minutes < 0 ? -_remaining : _remaining) % MINUTE;
+    const seconds = Number(_remaining / SECOND); _remaining = (seconds < 0 ? -_remaining : _remaining);
+    const milliseconds = Number(_remaining % SECOND);
+    const offset = new Date().getTimezoneOffset();
+    var _hour = Math.abs(Math2.div(offset, 60));
+    var _minute = Math.abs(offset % 60);
+    var _sign = offset <= 0 ? "+" : "-";
+    var _colon = _minute !== 0 ? ":" : "";
+    const weekDay = Number(BigMath.posmod(totalDays - 3n, 7n));
+    // processing now
+    const CONVERSIONS = new Map([
+        ["YYYY", [year, year.toString()]],
+        ["YYY", [(year - 1970), (year - 1970).toString()]],
+        ["YY", [year, year.toString().slice(-2)]],
+        ["MMMM", [month, (["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])[month]]],
+        ["MMM", [month, (["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])[month]]],
+        ["MM", [month, zeroPad(month, 2)]],
+        ["M", [month, month.toString()]],
+        ["WWWW", [null, (["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"])[weekDay]]],
+        ["WWW", [null, (["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])[weekDay]]],
+        ["WW", [null, (["G", "M", "T", "W", "H", "F", "S"])[weekDay]]],
+        ["W", [null, weekDay.toString()]],
+        ["DDDD", [Number(totalDays), totalDays.toString()]],
+        ["DDD", [days, days.toString()]],
+        ["DD", [day, zeroPad(day, 2)]],
+        ["D", [day, day.toString()]],
+        ["hhh", [Number(totalDays) * 24 + hours, (Number(totalDays) * 24 + hours).toString()]],
+        ["hh", [hours, zeroPad(hours, 2)]],
+        ["h", [hours, hours.toString()]],
+        ["HHH", [null, hours < 12 ? "AM" : "PM"]],
+        ["HH", [hours, zeroPad((hours + 11) % 12 + 1, 2)]],
+        ["H", [hours, ((hours + 11) % 12 + 1).toString()]],
+        ["mmm", [(Number(totalDays) * 24 + hours) * 60 + minutes, ((Number(totalDays) * 24 + hours) * 60 + minutes).toString()]],
+        ["mm", [minutes, zeroPad(minutes, 2)]],
+        ["m", [minutes, minutes.toString()]],
+        ["ssss", [milliseconds, zeroPad(milliseconds, 3)]],
+        ["sss", [Math.abs(seconds) + Math.abs(milliseconds), Math2.prec(seconds + (milliseconds / 1000), 3).toString()]],
+        ["ss", [seconds, zeroPad(seconds, 2)]],
+        ["s", [seconds, seconds.toString()]],
+        ["ZZZZ", [null, (offset === 0) ? "Z" : (_sign + zeroPad(_hour, 2) + ":" + zeroPad(_minute, 2))]],
+        ["ZZZ", [null, ({ "-720": "BIT", "-660": "NUT", "-600": "CKT", "-570": "MIT", "-540": "GIT", "-480": "PST", "-420": "MST", "-360": "CST", "-300": "EST", "-240": "AST", "-210": "NST", "-180": "BRT", "-150": "NDT", "-120": "AZOT", "-60": "EGT", "0": "GMT", "60": "CET", "120": "EET", "180": "FET", "210": "IRST", "240": "GET", "270": "AFT", "300": "PKT", "330": "IST", "345": "NPT", "360": "KGT", "390": "CCT", "420": "ICT", "480": "PHT", "525": "CWST", "540": "JST", "570": "ACST", "600": "AEST", "630": "ACDT", "660": "AEDT", "720": "NZST", "765": "CHAST", "780": "TOT", "825": "CHADT", "840": "LINT"})[offset] ?? "UTC" + _sign + _hour + _colon + _minute]],
+        ["ZZ", [null, (offset === 0) ? "Z" : (_sign + _hour + _colon + _minute)]],
+        ["Z", [offset, (offset / 60).toString()]],
+        ["!", [null, ""]],
+        ["%", [null, "%"]],
+    ]);
+    const keys = Array.from(CONVERSIONS.keys());
+    let ret = "", i = 0, trimZero = cutFront;
+    while (i < format.length) {
+        const key = keys.find(x => format.indexOf(x, i) === i);
+        if (key === "%") {
+            i++;
+            const escape = keys.find(x => format.indexOf(x, i) === i);
+            ret += escape;
+            i += escape.length;
+        } else if (key) {
+            i += key.length;
+            if (trimZero && CONVERSIONS.get(key)[0] === 0) continue;
+            if (CONVERSIONS.get(key)[0] !== null) trimZero = false;
+            ret += CONVERSIONS.get(key)[1];
+        } else {
+            i++;
+            if (trimZero) continue;
+            ret += format[i-1];
+        }
+    }
+    if (cutFront) {
+        ret = ret.trimStart();
+        var _sign = ""; if (ret.startsWith("-")) { _sign = "-"; ret = ret.slice(1); }
+        ret = _sign + ret.replace(/^0+/, "");
+    }
+    return ret;
+}
+const Math2 = {
+    div: (n, a) => Math.trunc(n / a),
+    posmod: (n, a) => ((n % a) + a) % a,
+    prec: (n, a=6) => Math.round(n * Math.pow(10, a)) / Math.pow(10, a)
+};
+const BigMath = {
+    min: (a, b) => BigInt(a) > BigInt(b) ? BigInt(b) : BigInt(a),
+    max: (a, b) => BigInt(a) > BigInt(b) ? BigInt(a) : BigInt(b),
+    abs: n => BigInt(n) * (BigInt(n) >= 0n ? 1n : -1n),
+    sign: n => BigInt(n) > 0n ? 1n : (BigInt(n) === 0n ? 0n : -1n),
+    clamp: (x, a, b) => { BigMath.min(BigMath.max(BigInt(x), BigMath.min(a, b)), BigMath.max(a, b)) },
+    between: (a, b, c, d) => {
+        if (d === undefined) return BigMath.min(a, c) <= BigInt(b) && BigInt(b) <= BigMath.max(a, c);
+        return BigMath.max(BigMath.min(a, b), BigMath.min(c, d)) <= BigMath.min(BigMath.max(a, b), BigMath.max(c, d));
+    },
+    div: (n, a) => {
+        n = BigInt(n) * BigMath.sign(a); a = BigMath.abs(a);
+        if (n === 0n) return 0n; // also covers div by 0
+        if (n > 0n) return n / a;
+        return ((n + 1n) / a) - 1n;
+    },
+    demod: (n, a) => BigInt(n) / BigInt(a) * BigInt(a),
+    posmod: (n, a) => ((BigInt(n) % BigMath.abs(a)) + BigInt(a)) % BigMath.abs(a) * BigMath.sign(a),
+}
+[insert_over]
