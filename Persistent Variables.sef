@@ -7,15 +7,15 @@ variables that save beyond sessions!!
 SAMMI.extCommand('Get Persistent Variable', 3355443, 52, { 'key': ['key', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Set Persistent Variable', 3355443, 52, { 'key': ['key', 14, ''], 'value': ['Variable/Number/\'String\'', 15, ''] });
 [insert_hook]
-case "Get Persistent Variable": { Get(SAMMIJSON.key, SAMMIJSON.FromButton, SAMMIJSON.output); } break
-case "Set Persistent Variable": { Set(SAMMIJSON.key, SAMMIJSON.value); } break
+case "Get Persistent Variable": { PROD_SAMMI_PERSVAR_GET(SAMMIJSON.key, SAMMIJSON.FromButton, SAMMIJSON.output); } break
+case "Set Persistent Variable": { PROD_SAMMI_PERSVAR_SET(SAMMIJSON.key, SAMMIJSON.value); } break
 [insert_script]
-async function Get(key, id, output) {
+async function PROD_SAMMI_PERSVAR_GET(key, id, output) {
     await SAMMI.setVariable("key", key, "PersistentVariable"); 
     await SAMMI.setVariable("output", id + "." + output, "PersistentVariable"); 
     await SAMMI.triggerButton("PersistentVariable_Fetch");
 }
-async function Set(key, value) {
+async function PROD_SAMMI_PERSVAR_SET(key, value) {
     await SAMMI.setVariable("key", key, "PersistentVariable"); 
     await SAMMI.setVariable("value", value, "PersistentVariable"); 
     await SAMMI.triggerButton("PersistentVariable_Assign");

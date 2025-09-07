@@ -8,13 +8,15 @@ SAMMI.extCommand('Get Date/Time with Milliseconds', 3355443, 52, { 'input': ['In
 SAMMI.extCommand('Format Time with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'DDDD:hh:mm:ss.sss'], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Format Date with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'YYYY-MM-DDThh:mm:ss.ssssZZZZ'], 'output': ['Save Variable As', 14, ''] });
 [insert_hook]
-case "Get Date/Time with Milliseconds": { apply(time, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
-case "Format Time with Milliseconds": { apply((i, f) => formatTime(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
-case "Format Date with Milliseconds": { apply((i, f) => formatDate(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
+case "Get Date/Time with Milliseconds": { PROD_SAMMI_APPLY(time, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "Format Time with Milliseconds": { PROD_SAMMI_APPLY((i, f) => formatTime(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
+case "Format Date with Milliseconds": { PROD_SAMMI_APPLY((i, f) => formatDate(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
 [insert_script]
-function apply(fn, output, btn, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn); }
+function PROD_SAMMI_APPLY(fn, output, btn, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn); }
 //* #REGION time operation
 // dealing with timezones sucks
+let PROD_SAMMI_FORMATTIME, PROD_SAMMI_FORMATDATE;
+(() => {
 const nullish = o => ([undefined, null, ""].includes(o) || Number.isNaN(o) || (Array.isArray(o) && o.length === 0) || (typeof o === "object" && Object.keys(o).length === 0)) ? null : o;
 const lastFindIndex = (arr, fn) => { for (let i = arr.length - 1; i >= 0; i--) if (fn(arr[i], i, arr)) return i; return -1; }
 const zeroPad = (o, zeroes) => {
@@ -231,4 +233,7 @@ const BigMath = {
     demod: (n, a) => BigInt(n) / BigInt(a) * BigInt(a),
     posmod: (n, a) => ((BigInt(n) % BigMath.abs(a)) + BigInt(a)) % BigMath.abs(a) * BigMath.sign(a),
 }
+PROD_SAMMI_FORMATTIME = formatTime;
+PROD_SAMMI_FORMATDATE = formatDate;
+})();
 [insert_over]

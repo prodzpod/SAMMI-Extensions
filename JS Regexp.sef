@@ -12,9 +12,9 @@ SAMMI.extCommand('Regular Expression', 3355443, 52, {
     'output': ['Save Variable As', 14, '']
 });
 [insert_hook]
-case "Regular Expression": { Regex(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.mode, SAMMIJSON.string, SAMMIJSON.input, SAMMIJSON.flag); } break
+case "Regular Expression": { PROD_SAMMIREGEX_REGEX(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.mode, SAMMIJSON.string, SAMMIJSON.input, SAMMIJSON.flag); } break
 [insert_script]
-function Regex(output, btn, mode, string, input, flag) { 
+function PROD_SAMMIREGEX_REGEX(output, btn, mode, string, input, flag) { 
     const re = new RegExp(input, flag); let ret = null;
     switch (mode) {
         case "Success": ret = re.test(string); break;

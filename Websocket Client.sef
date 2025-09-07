@@ -7,11 +7,11 @@ connect to websocket from sammi (but for free)
 SAMMI.extCommand('Connect to Websocket', 3355443, 52, { 'url': ['URL', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Send to Websocket', 3355443, 52, { 'ws': ['Websocket', 15, ''], 'input': ['Input', 14, ''] });
 [insert_hook]
-case "Connect to Websocket": { Init(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.url); } break
-case "Send to Websocket": { Send(SAMMIJSON.ws, SAMMIJSON.FromButton, SAMMIJSON.input); } break
+case "Connect to Websocket": { PROD_SAMMI_WS_INIT(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.url); } break
+case "Send to Websocket": { PROD_SAMMI_WS_SEND(SAMMIJSON.ws, SAMMIJSON.FromButton, SAMMIJSON.input); } break
 [insert_script]
 let PROD_WEBSOCKET_WEBSOCKETS = [];
-function Init(output, btn, url) {
+function PROD_SAMMI_WS_INIT(output, btn, url) {
     const ws = new WebSocket(url);
     PROD_WEBSOCKET_WEBSOCKETS.push(ws);
     const id = PROD_WEBSOCKET_WEBSOCKETS.length;
@@ -21,5 +21,5 @@ function Init(output, btn, url) {
     ws.addEventListener("error", e => SAMMI.triggerExt('Websocket Error', { websocket: id, error: e }));
     if (output !== "") SAMMI.setVariable(output, id, btn); 
 }
-function Send(ws, btn, input) { PROD_WEBSOCKET_WEBSOCKETS[ws].send(input) }
+function PROD_SAMMI_WS_SEND(ws, btn, input) { PROD_WEBSOCKET_WEBSOCKETS[ws].send(input) }
 [insert_over]

@@ -1,0 +1,103 @@
+[extension_name]
+MIDI
+[extension_info]
+connect to MIDI in/output. DOES NOT WORK ON SAFARI AND FIREFOX* (*needs configuration)
+[insert_external]
+[insert_command]
+SAMMI.extCommand('MIDI: Get List of Devices', 3355443, 52, { 'target': ['Target', 19, 'Outputs', null, ['Inputs', 'Outputs']], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('MIDI: Send Bytes', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'byte': ['Bytes', 14, ''], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });
+SAMMI.extCommand('MIDI: Press Note', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'channel': ['channel', 15, 0], 'note': ['note', 14, ''], 'velocity': ['velocity', 15, 127], 'release': ['Release In (in ms)', 15, 0], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });
+SAMMI.extCommand('MIDI: Release Note', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'channel': ['channel', 15, 0], 'note': ['note', 14, ''], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });
+PRODSAMMI_MIDI_MAIN();
+[insert_hook]
+case "MIDI: Get List of Devices": { SAMMI.setVariable(SAMMIJSON.output, Object.keys(SAMMIJSON.target === "Inputs" ? PRODSAMMI_MIDI_INPUTS : PRODSAMMI_MIDI_OUTPUTS), SAMMIJSON.FromButton); } break
+case "MIDI: Send Bytes": { 
+    let byte = SAMMIJSON.byte;
+    if (byte.startsWith("0x")) byte = byte.slice(2);
+    byte = byte.replace(/[^0-9a-fA-F]/g, "");
+    if (byte.length % 2) byte = "0" + byte;
+    let ret = [];
+    for (let i = 0; i < byte.length; i += 2) ret.push(parseInt(byte.slice(i, i + 2), 16));
+    PRODSAMMI_MIDI_SEND(SAMMIJSON.output, ret, (SAMMIJSON.relative ? performance.now() + 20 : 0) + SAMMIJSON.time);
+}
+case "MIDI: Press Note": { 
+    let bytes = [0b10010000, PRODSAMMI_MIDI_NOTE_TO_HALF_STEP(SAMMIJSON.note), SAMMIJSON.velocity]; bytes[0] |= Math.min(Math.max(SAMMIJSON.channel, 0), 16); 
+    let time = (SAMMIJSON.relative ? performance.now() + 20 : 0) + SAMMIJSON.time;
+    PRODSAMMI_MIDI_SEND(SAMMIJSON.output, bytes, time);
+    if (SAMMIJSON.release > 0) {
+        let bytes2 = [...bytes]; bytes2[0] &= 0b11101111;
+        PRODSAMMI_MIDI_SEND(SAMMIJSON.output, bytes2, time + SAMMIJSON.release);
+    }
+}
+case "MIDI: Release Note": { 
+    let bytes = [0b10000000, PRODSAMMI_MIDI_NOTE_TO_HALF_STEP(SAMMIJSON.note), 0]; bytes[0] |= Math.min(Math.max(SAMMIJSON.channel, 0), 16); 
+    let time = (SAMMIJSON.relative ? performance.now() + 20 : 0) + SAMMIJSON.time;
+    PRODSAMMI_MIDI_SEND(SAMMIJSON.output, bytes, time);
+}
+[insert_script]
+let PRODSAMMI_MIDI_INPUTS = {};
+let PRODSAMMI_MIDI_OUTPUTS = {};
+function PRODSAMMI_MIDI_MAIN() {
+    SAMMI.alert("Please allow MIDI Access in bridge website.");
+    navigator.requestMIDIAccess().then(midi => {
+        SAMMI.alert("MIDI Accessed!");
+        for (const entry of midi.inputs) {
+            PRODSAMMI_MIDI_INPUTS[entry[1].name] = entry[1];
+            entry[1].onmidimessage = event => {
+                // event.timeStamp & [event.data]
+                let ret = {};
+                ret.input = entry[1].name;
+                ret.timestamp = event.timeStamp;
+                ret.data = Array.from(event.data).map(x => x.toString(16).padStart(2, "0")).join("");
+                ret.channel = event.data[0] & 0b1111;
+                let status = {};
+                status[0b1000] = "note off";
+                status[0b1001] = "note on";
+                status[0b1010] = "poly aftertouch";
+                status[0b1011] = "control change";
+                status[0b1100] = "program change";
+                status[0b1101] = "mono aftertouch";
+                status[0b1110] = "pitch bend";
+                ret.status = status[event.data[0] >> 4];
+                switch (ret.status) {
+                    case "note off":
+                    case "note on":
+                        ret.key = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"][event.data[1] % 12];
+                        ret.octave = Math.floor(event.data[1] / 12) - 1
+                        ret.velocity = event.data[2];
+                        break;
+                    case "mono aftertouch":
+                        ret.pressure = event.data[1];
+                        break;
+                    case "poly aftertouch":
+                        ret.key = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"][event.data[1] % 12];
+                        ret.octave = Math.floor(event.data[1] / 12) - 1
+                        ret.pressure = event.data[2];
+                        break;
+                    case "control change":
+                        ret.control = event.data[1];
+                        ret.value = event.data[2];
+                        break;
+                    case "program change":
+                        ret.program = event.data[1];
+                        break;
+                    case "pitch bend":
+                        ret.value = (event.data[2] << 7) + event.data[1];
+                        break;
+                    default:
+                        ret.status = "other";
+                        break;
+                }
+                SAMMI.triggerExt('MIDI Input', ret)
+            }
+        }
+        for (const entry of midi.outputs) PRODSAMMI_MIDI_OUTPUTS[entry[1].name] = entry[1];
+    }, msg => SAMMI.alert("MIDI Access Failed:", msg));
+}
+function PRODSAMMI_MIDI_SEND(name, data, timestamp) { PRODSAMMI_MIDI_OUTPUTS[name]?.send(data, timestamp); }
+function PRODSAMMI_MIDI_NOTE_TO_HALF_STEP(note) {
+    const re = /([A-Ga-g]#?)(\d+)/.exec(note); if (!re) return 0;
+    const chromatic = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    return chromatic.indexOf(re[1].toUpperCase()) + 12 * (Number(re[2]) + 1);
+}
+[insert_over]

@@ -10,13 +10,13 @@ SAMMI.extCommand('Source Change Browser URL', 3355443, 52, { 'source': ['Source'
 SAMMI.extCommand('Source Refresh Browser', 3355443, 52, { 'source': ['Source', 5, ''] });
 SAMMI.extCommand('Source Change Color', 3355443, 52, { 'source': ['Source', 5, ''], 'color': ['New Color', 17, ''] });
 [insert_hook]
-case "Source Change Image Path": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeImagePath"); } break
-case "Source Change Media Path": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeMediaPath"); } break
-case "Source Change Browser URL": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeBrowserURL"); } break
-case "Source Change Refresh Browser": { Button(SAMMIJSON.source, "", "RefreshBrowser"); } break
-case "Source Change Color": { Button(SAMMIJSON.source, SAMMIJSON.path, "ChangeColor"); } break
+case "Source Change Image Path": { PROD_SAMMI_MEDIACONTROL_BUTTON(SAMMIJSON.source, SAMMIJSON.path, "ChangeImagePath"); } break
+case "Source Change Media Path": { PROD_SAMMI_MEDIACONTROL_BUTTON(SAMMIJSON.source, SAMMIJSON.path, "ChangeMediaPath"); } break
+case "Source Change Browser URL": { PROD_SAMMI_MEDIACONTROL_BUTTON(SAMMIJSON.source, SAMMIJSON.path, "ChangeBrowserURL"); } break
+case "Source Change Refresh Browser": { PROD_SAMMI_MEDIACONTROL_BUTTON(SAMMIJSON.source, "", "RefreshBrowser"); } break
+case "Source Change Color": { PROD_SAMMI_MEDIACONTROL_BUTTON(SAMMIJSON.source, SAMMIJSON.path, "ChangeColor"); } break
 [insert_script]
-async function Button(source, path, id) {
+async function PROD_SAMMI_MEDIACONTROL_BUTTON(source, path, id) {
     await SAMMI.setVariable("source", source, "OBSMediaControl_" + id); 
     await SAMMI.setVariable("path", path.replaceAll("\\", "\\\\"), "OBSMediaControl_" + id); 
     await SAMMI.triggerButton("OBSMediaControl_" + id);
