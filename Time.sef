@@ -4,6 +4,28 @@ Time with Milliseconds
 more customizable time
 [insert_external]
 [insert_command]
+/*
+* Time with Milliseconds by prodzpod
+* 
+* Commands
+* *Get Date/Time with Milliseconds*: returns a number of milliseconds passed since 1/1/1970.
+* *Format Date/Time with Milliseconds*: returns a string of formatted time.
+*
+* Parameters
+* YY: 20[24] * YYY: [-10](1960) * YYYY: [1960]
+* M: [5] * MM: [05] * MMM: [Jan] * MMM: [January]
+* D: [2] * DD: [02] * DDD: [57](days) * DDDD: [7381](days since 1970-01-01)
+* W: week [3] * WW: [W]ed * WWW: [Wed] * WWWW: [Wednesday]
+* h: [14] * hh: [14] * hhh: [134] (including days)
+* H: [2](14) * HH: [02](14) * HHH: [PM]
+* m: [4] * mm: [04]
+* s: [6] * ss: [06] * sss: [6.4]00 * ssss: 6.[400]
+* Z: UTC+[0] * ZZ: UTC[+0] * ZZZ: [GMT] * ZZZZ: UTC[+00:00]
+* %: interpret next replacekey as literal * %%: % * !: split two replacekeys
+*
+* Default FormatTime format: DDDD:hh:mm:sss
+* Default FormatDate format: YYYY-MM-DDThh:mm:ss.ssssZZZZ
+*/
 SAMMI.extCommand('Get Date/Time with Milliseconds', 3355443, 52, { 'input': ['Input', 14, 'now'], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Format Time with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'DDDD:hh:mm:ss.sss'], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Format Date with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'YYYY-MM-DDThh:mm:ss.ssssZZZZ'], 'output': ['Save Variable As', 14, ''] });

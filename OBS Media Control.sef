@@ -4,6 +4,16 @@ OBS Media Control
 you probably shouldn't have to touch json for change image path
 [insert_external]
 [insert_command]
+/*
+* OBS Media Control by prodzpod
+* 
+* Commands
+* *Source Change Image Path*: Changes the image without the need to manually send OBS event.
+* *Source Change Media Path*: Changes the media source without the need to manually send OBS event.
+* *Source Change Browser URL*: Changes the browser URL without the need to manually send OBS event.
+* *Source Refresh Browser*: Refreshes the browser source without the need to manually send OBS event.
+* *Source Change Color*: Changes the color source color without the need to manually send OBS event.
+*/
 SAMMI.extCommand('Source Change Image Path', 3355443, 52, { 'source': ['Source', 5, ''], 'path': ['New Path', 23, ''] });
 SAMMI.extCommand('Source Change Media Path', 3355443, 52, { 'source': ['Source', 5, ''], 'path': ['New Path', 22, ''] });
 SAMMI.extCommand('Source Change Browser URL', 3355443, 52, { 'source': ['Source', 5, ''], 'path': ['New URL', 14, ''] });

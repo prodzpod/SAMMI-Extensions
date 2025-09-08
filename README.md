@@ -1,0 +1,2 @@
+# prod's SAMMI Extensions
+these are a collection of [SAMMI](https://sammi.solutions/) extensions that I believe are quite useful to facilitate interactive streaming. How to use each extensions are contained within its file as a comment, and the repository also contains example decks that showcase individual extensions.

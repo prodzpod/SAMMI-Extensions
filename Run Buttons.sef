@@ -4,6 +4,21 @@ Run Buttons
 run buttons as a command (but for free also more of it)
 [insert_external]
 [insert_command]
+/*
+* Run Buttons by prodzpod
+* 
+* Commands
+* *Get Buttons*: returns a list of button IDs by a certain criteria.
+* *Run Buttons*: runs all of the buttons that meet a certain criteria.
+* *Init Buttons*: reinitializes all of the buttons variables that meet a certain criteria.
+* *Stop Buttons*: stops all of the buttons that meet a certain criteria.
+* *Randomly Run Buttons*: randomly selects and runs one of the buttons that meet a certain criteria.
+*
+* Parameters
+* *deck*: name of the deck to search the buttons in. leave blank to search all buttons.
+* *Detection Mode*: criteria to search buttons by. for `by Name`, checks if the given value should exactly be that button's name, or should start with it, or only requires that string to be part of its name.
+* *Trigger Data Object*: object to contain inside trigger pull data when the button is run.
+*/
 SAMMI.extCommand('Get Buttons by Deck', 3355443, 52, { 'deck': ['Deck', 33, 0], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Get Buttons by ID', 3355443, 52, { 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Get Buttons by Label', 3355443, 52, { 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']], 'output': ['Save Variable As', 14, ''] });
@@ -27,7 +42,7 @@ SAMMI.extCommand('Stop Buttons by ID', 3355443, 52, { 'condition': ['Button ID',
 SAMMI.extCommand('Stop Buttons by Label', 3355443, 52, { 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']], 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''] });
 SAMMI.extCommand('Stop Buttons by Group', 3355443, 52, { 'condition': ['Button Group', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']], 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''] });
 SAMMI.extCommand('Stop Buttons by Color', 3355443, 52, { 'condition': ['Button Color', 17, ''], 'deck': ['Deck (blank for all)', 14, ''], 'output': ['Save Variable As (Array/IDs of buttons stopped)', 14, ''] });
-SAMMI.extCommand('Randomly Buttons by ID List', 3355443, 52, { 'data': ['Trigger Data Object', 14, ''], 'arr': ['Button ID Array Name', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Randomly Run Buttons by ID List', 3355443, 52, { 'data': ['Trigger Data Object', 14, ''], 'arr': ['Button ID Array Name', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Randomly Run Buttons by Deck', 3355443, 52, { 'data': ['Trigger Data Object', 14, ''], 'deck': ['Deck', 33, 0], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Randomly Run Buttons by ID', 3355443, 52, { 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button ID', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']], 'output': ['Save Variable As (ID of button ran)', 14, ''] });
 SAMMI.extCommand('Randomly Run Buttons by Label', 3355443, 52, { 'data': ['Trigger Data Object', 14, ''], 'condition': ['Button Label', 14, ''], 'deck': ['Deck (blank for all)', 14, ''], 'mode': ['Detection Mode', 19, 'Exact Match', null, ['Exact Match', 'Starts With', 'Ends With', 'Includes']], 'output': ['Save Variable As (ID of button ran)', 14, ''] });

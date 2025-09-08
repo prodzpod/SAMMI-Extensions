@@ -4,6 +4,25 @@ Websocket Client
 connect to websocket from sammi (but for free)
 [insert_external]
 [insert_command]
+/*
+* Websocket Client by prodzpod
+* 
+* Commands
+* *Connect to Websocket*: establish connection with a websocket address. 
+* *Send to Websocket*: sends data to the websocket instance.
+*
+* Triggers
+* *Websocket Open*: triggered when websocket has established connection.
+*   - *websocket*: an ID that can be used to send data.
+* *Websocket Close*: triggered when websocket has just been closed.
+*   - *websocket*: an ID that just closed.
+* *Websocket Message*: triggered when websocket recieves data from the server.
+*   - *websocket*: an ID that can be used to send data.
+*   - *message*: the data object.
+* *Websocket Error*: triggered when websocket has just encountered an error.
+*   - *websocket*: an ID that just closed.
+*   - *error*: the error message.
+*/
 SAMMI.extCommand('Connect to Websocket', 3355443, 52, { 'url': ['URL', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Send to Websocket', 3355443, 52, { 'ws': ['Websocket', 15, ''], 'input': ['Input', 14, ''] });
 [insert_hook]

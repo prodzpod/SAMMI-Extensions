@@ -4,6 +4,31 @@ More Collection
 array/object util functions
 [insert_external]
 [insert_command]
+/*
+* More Collections by prodzpod
+* 
+* Commands
+* *Object Get Entries*: equivalent to js `Object.entries()`
+* *Entries to Object*: the reverse of *Object Get Entries* where it composes list of pairs into an object.
+* *Array Reverse*: reverses and array.
+* *Array Flatten*: equivalent to js `Array.flat()`
+* *Array Transpose*: swaps the rows and columns of a 2d array matrix.
+* *Array Zip*: combines two arrays into an array of pairs.
+* *Array Make Unique*: only leaves the first occurance for all elements in the array.
+* *Array Intersect*: returns a new array with only elements contained in both arrays.
+* *Array Union*: returns a new array with only elements contained in either arrays.
+* *Object Union*: returns a new object with only entries with its key contained in either arrays.
+* *Array Exclusion*: returns a new array with only elements contained in the left array but not the right.
+* *Object Filter by Key*: returns a new object with only the keys that satisfy the set condition.
+* *Object Filter by Value*: returns a new object with only the values that satisfy the set condition.
+* *Object Map Value*: returns a new object where all the values are transformed by the same set operation.
+* *Object Get Sorted Keys by Value*: returns a list of keys sorted by the value corresponding to that key.
+* *Get Random Element*: returns a random element from the list.
+* *Get Random Element From Weighted List*: returns a random key of an object where all the values are its weight.
+* *String Occurance*: returns a number of time this substring has occured in the string.
+* *String Pad Start*: returns a new string padded from the left by a set length with a set character.
+* *String Pad End*: returns a new string padded from the right by a set length with a set character.
+*/
 SAMMI.extCommand('Object Get Entries', 3355443, 52, { 'input': ['Input Object', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Entries to Object', 3355443, 52, { 'input': ['Input Entries', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Array Reverse', 3355443, 52, { 'input': ['Input Array', 14, ''], 'output': ['Save Variable As', 14, ''] });

@@ -4,6 +4,40 @@ Heat
 clickmap but free (and works)
 [insert_external]
 [insert_command]
+/*
+* SAMMI Heat Bridge by prodzpod
+* 
+* How to Use: 
+* Download [Websocket Client] and [Time] extension from the same repository.
+* Download this extension and restart SAMMI.
+* Enable [GreenHeat](http://heat.prod.kr/) or [Legacy Heat](https://heat.j38.net/) in your Twitch channel. check the greenheat site for its websocket syntax.
+* 
+* Commands
+* *Heat: Add Coordinate*: adds a stationary rectangle as a heatmap object.
+* *Heat: Add Source*: adds an OBS input source as a heatmap object.
+* *Heat: Remove Clickmap*: removes a heatmap object by name.
+*
+* Parameters
+* *name*: name of the heatmap object, used to identify uniquely between each objects.
+* *x, y, w, h*: the dimensions of the object.
+* *z/depth*: the depth of the object. if multiple objects of same depth is present, all will be clicked at once. If there is multiple objects stacked with different depths, only the highest one will be clicked.
+* *Detection Type*: whether to respond to all events or only certain events.
+*
+* Triggers
+* *Heat Click*/*Heat Hover*/*Heat Drag*/*Heat Release*: Triggered whenever a greenheat message is recieved, whether it clicked on a defined clickmap or not. useful for screen-wide events.
+*   - *ws*: the websocket object the heat message originated from.
+*   - *id*: the twitch id (or the opaque id) of a user.
+*   - *type*: the type of detection. is either "click", "hover", "drag" or "release".
+*   - *x*/*y*: The coordinates of the click.
+*   - *button*: Mouse button used to perform this action. defaults to "left", but can also be "middle" or "right".
+*   - *ctrl*/*shift*/*alt*: whether modifier keys were pressed during clicks.
+*   - *time*: the latency-compensated time of click.
+*   - *latency*: the latency between the click and stream delay.
+*   - *isAnonymous*: whether the id is opaque or real twitch id. only non-anonymous accounts can be queried for names or colors.
+* *Heat Clickmap*: used when a clickmap detects a click of some kind. contains all the pull values of *Heat Click* as well as extra values described below.
+*   - *name*: name of the heatmap that was clicked. 
+*   - *local_x*/*local_y*: clicked position relative to the object. [0,0] would be clicking the object's top-left corner, while [1,1] would be bottom right.
+*/
 SAMMI.extCommand('Heat: Add Coordinate', 3355443, 52, { 
     'name': ['Name', 14, ''], 
     'x': ['X Position', 15, 0],

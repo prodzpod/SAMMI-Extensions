@@ -4,6 +4,12 @@ JS Eval
 exposes js eval from sammi
 [insert_external]
 [insert_command]
+/*
+* JavaScript Evaluation for SAMMI by prodzpod
+* 
+* Commands
+* *JavaScript Eval*: evaluates a javascript object. the return value is stored as a SAMMI variable in the provided name.
+*/
 SAMMI.extCommand('JavaScript Eval', 3355443, 52, { 'input': ['Input', 0, ''], 'outputVariable': ['Save Variable As', 14, ''] });
 [insert_hook]
 case "JavaScript Eval": { 

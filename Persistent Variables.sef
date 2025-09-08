@@ -4,7 +4,14 @@ Persistent Variables
 variables that save beyond sessions!!
 [insert_external]
 [insert_command]
-SAMMI.extCommand('Get Persistent Variable', 3355443, 52, { 'key': ['key', 14, ''], 'output': ['Save Variable As', 14, ''] });
+/*
+* Persistent Variables by prodzpod
+* 
+* Commands
+* *Get Persistent Variable*: Retrieves the variable. If the variable is not defined, leaves the variable unchanged.
+* *Set Persistent Variable*: Sets the variable and save it to a file.
+*/
+SAMMI.extCommand('Get Persistent Variable', 3355443, 52, { 'key': ['key', 14, ''], 'output': ['Save Variable As', 14, ''], 'default': ['default', 15, ''] });
 SAMMI.extCommand('Set Persistent Variable', 3355443, 52, { 'key': ['key', 14, ''], 'value': ['Variable/Number/\'String\'', 15, ''] });
 [insert_hook]
 case "Get Persistent Variable": { PROD_SAMMI_PERSVAR_GET(SAMMIJSON.key, SAMMIJSON.FromButton, SAMMIJSON.output); } break

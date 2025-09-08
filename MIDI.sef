@@ -4,6 +4,38 @@ MIDI
 connect to MIDI in/output. DOES NOT WORK ON SAFARI AND FIREFOX* (*needs configuration)
 [insert_external]
 [insert_command]
+/*
+* SAMMI MIDI Access by prodzpod
+* 
+* How to Use: 
+* Download this extension and restart SAMMI Bridge.
+* Allow MIDI Access from the SAMMI bridge webpage.
+* if Firefox, use a [Site Permission Add-on](https://support.mozilla.org/en-US/kb/site-permission-add-ons) for MIDI Access before restarting bridge.
+* 
+* Commands
+* *MIDI: Get List of Devices*: gets a list of names for a specific category.
+* *MIDI: Send Bytes*: sends an arbiturary list of bytes as a MIDI output.
+* *MIDI: Press Note*: sends a note press event to a MIDI output, with delay and hold time.
+* *MIDI: Release Note*: sends a note release event in case note duration was not set while using *MIDI: Press Note*.
+*
+* Parameters
+* *channel*: channel found during the MIDI survey, defaults to 0. should work in most circumstances.
+* *byte*: the raw bytes to send. in hexadecimal with or without "0x".
+* *note*: the note value to send. letter name + octave (C4, D#7, A-1, etc...)
+* *velocity*: the volume of the note played, from 0 to 127.
+* *release*: time to wait before releasing the note back in milliseconds.
+* *time*: time to wait before firing in milliseconds.
+* *relative*: if unchecked, use the absolute *time* value to judge when it is sent.
+*
+* Triggers
+* *MIDI Input*: Triggered whenever a MIDI input sends a message.
+*   - *input*: the midi input the message originated from.
+*   - *timestamp*: the time this message was originally made.
+*   - *data*: the raw bytes of the message in hexadecimal.
+*   - *status*: the type of message, is either "note on", "note off", "mono aftertouch", "poly aftertouch", "control change", "program change", or "other".
+*   - *channel*: the channel of the midi being played.
+*   - *key*/*octave*/*velocity*/*pressure*: the target message's parameters.
+*/
 SAMMI.extCommand('MIDI: Get List of Devices', 3355443, 52, { 'target': ['Target', 19, 'Outputs', null, ['Inputs', 'Outputs']], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('MIDI: Send Bytes', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'byte': ['Bytes', 14, ''], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });
 SAMMI.extCommand('MIDI: Press Note', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'channel': ['channel', 15, 0], 'note': ['note', 14, ''], 'velocity': ['velocity', 15, 127], 'release': ['Release In (in ms)', 15, 0], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });

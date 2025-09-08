@@ -4,6 +4,33 @@ More Math
 exposes js math object from sammi (but in a user friendly way)
 [insert_external]
 [insert_command]
+/*
+* More Math by prodzpod
+* 
+* Commands
+* *More Math: Constant*: returns a constant into the variable.
+* *More Math: Absolute Value*: returns the positive number of the same value if the value is negative.
+* *More Math: Sign*: returns 1, 0 or -1 depending on its sign.
+* *More Math: Arc/Hyperbolic Sine/Cosine/Tangent*: Additional trigonometry functions.
+* *More Math: Two-Argument Arc Tangent*: Returns an angle from (0, 0) to (x, y). note that the first argument is `y` and not `x`.
+* *More Math: Cube Root*: returns a cube root of the number. cbrt(8) = 2.
+* *More Math: Ceiling*: rounds up the number to the nearest integer.
+* *More Math: Floor*: rounds down the number to the nearest integer.
+* *More Math: Round*: rounds up if .5 or more or down the number to the nearest integer. 
+* *More Math: Truncate*: rounds down the number to the nearest integer.
+* *More Math: Exponentiate*: takes a number to an arbiturary power.
+* *More Math: Get Hypotenuse*: returns a distance between (0, 0) and (a, b).
+* *More Math: Get Array Hypotenuse*: returns the sum of square roots of each element in the list.
+* *More Math: Log*: takes a number to an arbiturary logarithm.
+* *More Math: Get Array Sum*: returns the sum of all elements in the array.
+* *More Math: Max*: returns the larger value.
+* *More Math: Get Array Max*: returns the largest element in the array.
+* *More Math: Min*: returns the smaller value.
+* *More Math: Get Array Min*: returns the smallest element in the array.
+* *More Math: Round to Decimal Point*: rounds the number to specified decimal point. use negative number to round to 10s or more.
+* *More Math: Mod to Positive Value*: takes a remainder that is always positive.
+* *More Math: Anti-Linear Interpolation*: given a range and result value, find the "weight" of that result from Linear Interpolation. equivalent to ((t - a) / (b - a)).
+*/
 SAMMI.extCommand('More Math: Constant: E', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('More Math: Constant: Pi', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('More Math: Constant: ln(10)', 3355443, 52, { 'output': ['Save Variable As', 14, ''] });

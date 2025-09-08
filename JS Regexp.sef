@@ -4,6 +4,22 @@ JS RegExp
 exposes js regexp object from sammi (but for free)
 [insert_external]
 [insert_command]
+/*
+* JavaScript Regular Expression for SAMMI by prodzpod
+* 
+* Commands
+* *Regular Expression*: evaluates a string with regex.
+* 
+* Parameters
+* *Store Mode*: determines which info to store from the evaluation.
+*   - *Success*: stores a boolean whether the pattern was matched or not.
+*   - *Match*: stores a substring corresponding to the pattern matched.
+*   - *Capture Array*: stores an array of the first match with capture arrays (parentheses).
+*   - *Index*: stores an index where the first match starts.
+*   - *Capture Index*: stores a list of indices according to capture array.
+* *Input Pattern*: the pattern to match, single backslash will register as a backslash.
+* *Flag*: the flags for the regular expression. contains "u", "i", "g" or more.
+*/
 SAMMI.extCommand('Regular Expression', 3355443, 52, { 
     'mode': ['Store Mode', 19, 'Success', null, ['Success', 'Match', 'Capture Array', 'Index', 'Capture Index Array']], 
     'string': ['Input String', 14, ''],
