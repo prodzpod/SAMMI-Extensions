@@ -34,7 +34,7 @@ connect to MIDI in/output. DOES NOT WORK ON SAFARI AND FIREFOX* (*needs configur
 *   - *data*: the raw bytes of the message in hexadecimal.
 *   - *status*: the type of message, is either "note on", "note off", "mono aftertouch", "poly aftertouch", "control change", "program change", or "other".
 *   - *channel*: the channel of the midi being played.
-*   - *key*/*octave*/*velocity*/*pressure*: the target message's parameters.
+*   - *key* / *octave* / *velocity* / *pressure*: the target message's parameters.
 */
 SAMMI.extCommand('MIDI: Get List of Devices', 3355443, 52, { 'target': ['Target', 19, 'Outputs', null, ['Inputs', 'Outputs']], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('MIDI: Send Bytes', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'byte': ['Bytes', 14, ''], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });
