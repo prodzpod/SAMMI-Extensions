@@ -23,22 +23,38 @@ connect to websocket from sammi (but for free)
 *   - *websocket*: an ID that just closed.
 *   - *error*: the error message.
 */
-SAMMI.extCommand('Connect to Websocket', 3355443, 52, { 'url': ['URL', 14, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Connect to Websocket', 3355443, 52, { 'url': ['URL', 14, ''], 'reconnect': ['Reconnection Time', 15, 0], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Send to Websocket', 3355443, 52, { 'ws': ['Websocket', 15, ''], 'input': ['Input', 14, ''] });
 [insert_hook]
-case "Connect to Websocket": { PROD_SAMMI_WS_INIT(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.url); } break
+case "Connect to Websocket": { PROD_SAMMI_WS_INIT(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.url, SAMMIJSON.reconnect); } break
 case "Send to Websocket": { PROD_SAMMI_WS_SEND(SAMMIJSON.ws, SAMMIJSON.FromButton, SAMMIJSON.input); } break
 [insert_script]
 let PROD_WEBSOCKET_WEBSOCKETS = [];
-function PROD_SAMMI_WS_INIT(output, btn, url) {
-    const ws = new WebSocket(url);
-    PROD_WEBSOCKET_WEBSOCKETS.push(ws);
-    const id = PROD_WEBSOCKET_WEBSOCKETS.length;
-    ws.addEventListener("open", () => SAMMI.triggerExt('Websocket Open', { websocket: id }));
-    ws.addEventListener("close", () => SAMMI.triggerExt('Websocket Close', { websocket: id }));
-    ws.addEventListener("message", m => SAMMI.triggerExt('Websocket Message', { websocket: id, message: m.data }));
-    ws.addEventListener("error", e => SAMMI.triggerExt('Websocket Error', { websocket: id, error: e }));
+function PROD_SAMMI_WS_INIT(output, btn, url, reconnect) {
+    const id = PROD_WEBSOCKET_WEBSOCKETS.length + 1;
+    const ws = PROD_SAMMI_WS_INIT_INTERNAL(id, url, reconnect);
     if (output !== "") SAMMI.setVariable(output, id, btn); 
+}
+function PROD_SAMMI_WS_INIT_INTERNAL(id, url, reconnect) {
+    const ws = new WebSocket(url);
+    PROD_WEBSOCKET_WEBSOCKETS[id - 1] = ws;
+    ws.addEventListener("open", () => SAMMI.triggerExt('Websocket Open', { websocket: id }));
+    ws.addEventListener("close", () => {
+        SAMMI.triggerExt('Websocket Close', { websocket: id });
+        if (reconnect > 0) {
+            SAMMI.alert("WebSocket Closed, Reconnecting Websocket:", url);
+            setTimeout(() => PROD_SAMMI_WS_INIT_INTERNAL(id, url, reconnect), reconnect * 1000);
+        }
+    });
+    ws.addEventListener("message", m => SAMMI.triggerExt('Websocket Message', { websocket: id, message: m.data }));
+    ws.addEventListener("error", e => {
+        SAMMI.triggerExt('Websocket Error', { websocket: id, error: e });
+        if (reconnect > 0) {
+            SAMMI.alert("WebSocket Crashed, Reconnecting Websocket:", url);
+            setTimeout(() => PROD_SAMMI_WS_INIT_INTERNAL(id, url, reconnect), reconnect * 1000);
+        }
+    });
+    return ws;
 }
 function PROD_SAMMI_WS_SEND(ws, btn, input) { PROD_WEBSOCKET_WEBSOCKETS[ws].send(input) }
 [insert_over]
