@@ -28,9 +28,9 @@ SAMMI.extCommand('Regular Expression', 3355443, 52, {
     'output': ['Save Variable As', 14, '']
 });
 [insert_hook]
-case "Regular Expression": { PROD_SAMMIREGEX_REGEX(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.mode, SAMMIJSON.string, SAMMIJSON.input, SAMMIJSON.flag); } break
+case "Regular Expression": { PROD_SAMMIREGEX_REGEX(SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.mode, SAMMIJSON.string, SAMMIJSON.input, SAMMIJSON.flag); } break
 [insert_script]
-function PROD_SAMMIREGEX_REGEX(output, btn, mode, string, input, flag) { 
+function PROD_SAMMIREGEX_REGEX(output, btn, instance, mode, string, input, flag) { 
     const re = new RegExp(input, flag); let ret = null;
     switch (mode) {
         case "Success": ret = re.test(string); break;
@@ -42,6 +42,6 @@ function PROD_SAMMIREGEX_REGEX(output, btn, mode, string, input, flag) {
         case "Capture Array": ret = re.exec(string) ?? []; break;
         case "Capture Index Array": ret = (flag.includes("d") ? re : new RegExp(input, flag + "d")).exec(string)?.indices.map(x => x[0]) ?? []; break;
     }
-    if (output !== "") SAMMI.setVariable(output, ret, btn); 
+    if (output !== "") SAMMI.setVariable(output, ret, btn, instance); 
 }
 [insert_over]

@@ -10,6 +10,7 @@ clickmap but free (and works)
 * How to Use: 
 * Download this extension and restart SAMMI.
 * Enable [GreenHeat](http://heat.prod.kr/) or [Legacy Heat](https://heat.j38.net/) in your Twitch channel. check the greenheat site for its websocket syntax.
+* OBS Folders are janky and might not work with the heatmap system (use nested scenes instead.)
 * 
 * Commands
 * *Heat: Add Source*: adds an OBS input source as a heatmap object.
@@ -65,9 +66,9 @@ SAMMI.extCommand("Heat: Remove Source from Heatmap", 3355443, 52, {
 })();
 [insert_hook]
 case "Heat: Save Heatmap": { PROD_SAMMIHEAT_SAVE(SAMMIJSON.file) } break;
-case "Heat: Load Heatmap": { PROD_SAMMI_APPLY(PROD_SAMMIHEAT_LOAD, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.file) } break;
-case "Heat: Add Source to Heatmap": { PROD_SAMMI_APPLY(PROD_SAMMIHEAT_ADD_SOURCE, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON); } break;
-case "Heat: Remove Source from Heatmap": { PROD_SAMMI_APPLY(PROD_SAMMIHEAT_DELETE_SOURCE, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.name); } break;
+case "Heat: Load Heatmap": { PROD_SAMMI_APPLY(PROD_SAMMIHEAT_LOAD, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.file) } break;
+case "Heat: Add Source to Heatmap": { PROD_SAMMI_APPLY(PROD_SAMMIHEAT_ADD_SOURCE, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON); } break;
+case "Heat: Remove Source from Heatmap": { PROD_SAMMI_APPLY(PROD_SAMMIHEAT_DELETE_SOURCE, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.name); } break;
 [insert_script]
 let PROD_SAMMIHEAT_HEATMAP = {};
 async function PROD_SAMMIHEAT_SAVE(file) {
@@ -82,6 +83,7 @@ async function PROD_SAMMIHEAT_LOAD(file) {
     return PROD_SAMMIHEAT_HEATMAP;
 }
 async function PROD_SAMMIHEAT_ADD_SOURCE(json) {
+    console.log(json);
     PROD_SAMMIHEAT_HEATMAP[json.z] ??= [];
     PROD_SAMMIHEAT_HEATMAP[json.z].push({
         name: json.name,
@@ -97,7 +99,7 @@ async function PROD_SAMMIHEAT_DELETE_SOURCE(name) {
     await PROD_SAMMIHEAT_SAVE("heatmap_backup.json");
     return PROD_SAMMIHEAT_HEATMAP;
 }
-function PROD_SAMMI_APPLY(fn, output, btn, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn); }
+function PROD_SAMMI_APPLY(fn, output, btn, instance, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn, instance); }
 let PROD_SAMMIHEAT_WS = {}
 function PROD_SAMMIHEAT_WS_INIT(url, channel) {
     const ws = new WebSocket(url);

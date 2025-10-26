@@ -50,10 +50,10 @@ SAMMI.extCommand('String Occurance', 3355443, 52, { 'str': ['Input String', 14, 
 SAMMI.extCommand('String Pad Start', 3355443, 52, { 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, '0'], 'len': ['Input Pad Length', 15, 1], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('String Pad End', 3355443, 52, { 'str': ['Input String', 14, ''], 'substr': ['Input Pad Character', 14, ' '], 'len': ['Input Pad Length', 15, 1], 'output': ['Save Variable As', 14, ''] });
 [insert_hook]
-case "Object Get Entries": { (async () => { PROD_SAMMI_APPLY(Object.entries, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
-case "Entries to Object": { (async () => { PROD_SAMMI_APPLY(kvpair => { let ret = {}; for (let kv of kvpair) ret[kv[0]] = kv[1]; return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
-case "Array Reverse": { (async () => { PROD_SAMMI_APPLY(a => a.reverse(), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
-case "Array Flatten": { (async () => { PROD_SAMMI_APPLY((a, b) => { if (!b) return a.flat(); while (a.some(Array.isArray)) a = a.flat(); return a; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.doall); })(); } break
+case "Object Get Entries": { (async () => { PROD_SAMMI_APPLY(Object.entries, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Entries to Object": { (async () => { PROD_SAMMI_APPLY(kvpair => { let ret = {}; for (let kv of kvpair) ret[kv[0]] = kv[1]; return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Reverse": { (async () => { PROD_SAMMI_APPLY(a => a.reverse(), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Flatten": { (async () => { PROD_SAMMI_APPLY((a, b) => { if (!b) return a.flat(); while (a.some(Array.isArray)) a = a.flat(); return a; }, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.doall); })(); } break
 case "Array Transpose": { (async () => { PROD_SAMMI_APPLY(a => { 
     if (!a.length) return []; 
     let ret = []; 
@@ -61,13 +61,13 @@ case "Array Transpose": { (async () => { PROD_SAMMI_APPLY(a => {
     for (let i = 0; i < a.length; i++) for (let j = 0; j < a[i].length; j++) 
         ret[j].push(a[i][j]);
     return ret;
-}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
-case "Array Zip": { (async () => { PROD_SAMMI_APPLY((a, b) => { let ret = []; for (let i = 0; i < Math.max(a.length, b.length); i++) ret.push([a[i], b[i]]); return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
-case "Array Make Unique": { (async () => { PROD_SAMMI_APPLY(a => Array.from(new Set(a)), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
-case "Array Intersect": { (async () => { PROD_SAMMI_APPLY((a, b) => a.filter(k => b.includes(k)), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
-case "Array Exclusion": { (async () => { PROD_SAMMI_APPLY((a, b) => a.filter(k => !b.includes(k)), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
-case "Array Union": { (async () => { PROD_SAMMI_APPLY((a, b) => [...a, ...b.filter(k => !a.includes(k))], SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
-case "Object Union": { (async () => { PROD_SAMMI_APPLY((a, b) => ({...a, ...b}), SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.a, SAMMIJSON.FromButton), await GetObject(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Zip": { (async () => { PROD_SAMMI_APPLY((a, b) => { let ret = []; for (let i = 0; i < Math.max(a.length, b.length); i++) ret.push([a[i], b[i]]); return ret; }, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.a, SAMMIJSON.FromButton), await PROD_SAMMI_GET_OBJECT(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Array Make Unique": { (async () => { PROD_SAMMI_APPLY(a => Array.from(new Set(a)), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+case "Array Intersect": { (async () => { PROD_SAMMI_APPLY((a, b) => a.filter(k => b.includes(k)), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.a, SAMMIJSON.FromButton), await PROD_SAMMI_GET_OBJECT(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Array Exclusion": { (async () => { PROD_SAMMI_APPLY((a, b) => a.filter(k => !b.includes(k)), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.a, SAMMIJSON.FromButton), await PROD_SAMMI_GET_OBJECT(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Array Union": { (async () => { PROD_SAMMI_APPLY((a, b) => [...a, ...b.filter(k => !a.includes(k))], SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.a, SAMMIJSON.FromButton), await PROD_SAMMI_GET_OBJECT(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
+case "Object Union": { (async () => { PROD_SAMMI_APPLY((a, b) => ({...a, ...b}), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.a, SAMMIJSON.FromButton), await PROD_SAMMI_GET_OBJECT(SAMMIJSON.b, SAMMIJSON.FromButton)); })(); } break
 case "Object Filter by Key": { (async () => { PROD_SAMMI_APPLY((o, op, n) => {
     let fn = (a, b) => true;
     switch (op) {
@@ -80,7 +80,7 @@ case "Object Filter by Key": { (async () => { PROD_SAMMI_APPLY((o, op, n) => {
     }
     let ret = {};
     for (const k in o) if (fn(k, n)) ret[k] = o[k];
-}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
 case "Object Filter by Value": { (async () => { PROD_SAMMI_APPLY((o, op, n) => {
     let fn = (a, b) => true;
     switch (op) {
@@ -93,7 +93,7 @@ case "Object Filter by Value": { (async () => { PROD_SAMMI_APPLY((o, op, n) => {
     }
     let ret = {};
     for (const k in o) if (fn(o[k], n)) ret[k] = o[k];
-}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
 case "Object Map Value": { (async () => { PROD_SAMMI_APPLY((o, op, n) => {
     let fn = (a, n) => a;
     switch (op) {
@@ -118,7 +118,7 @@ case "Object Map Value": { (async () => { PROD_SAMMI_APPLY((o, op, n) => {
     }
     let ret = {};
     for (const k in o) ret[k] = fn(o[k]);
-}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.compare, SAMMIJSON.number); })(); } break
 case "Object Get Sorted Keys by Value": { (async () => { PROD_SAMMI_APPLY((o, asc) => {
     let ret = Object.keys(o).sort((a, b) => {
         if (o[a] === null) return -1; if (o[b] === null) return 1; 
@@ -127,22 +127,22 @@ case "Object Get Sorted Keys by Value": { (async () => { PROD_SAMMI_APPLY((o, as
     });
     if (!asc) ret = ret.reverse();
     return ret;
-}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.asc); })(); } break
-case "Get Random Element": { (async () => { PROD_SAMMI_APPLY(a => a[Math.floor(Math.random() * a.length)], SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton), SAMMIJSON.asc); })(); } break
+case "Get Random Element": { (async () => { PROD_SAMMI_APPLY(a => a[Math.floor(Math.random() * a.length)], SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
 case "Get Random Element From Weighted List": { (async () => { PROD_SAMMI_APPLY(a => {
     let ret = Math.random() * Object.values(a).reduce((x, y) => x + y, 0);
     for (let k in a) { if (ret < a[k]) return k; ret -= a[k]; }
     return Object.keys(a).at(-1);
-}, SAMMIJSON.output, SAMMIJSON.FromButton, await GetObject(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, await PROD_SAMMI_GET_OBJECT(SAMMIJSON.input, SAMMIJSON.FromButton)); })(); } break
 case "String Occurance": { (async () => { PROD_SAMMI_APPLY((str, sub) => {
     let ret = 0, ptr = 0;
     let oc = str.indexOf(sub, ptr);
     while (oc !== -1) { ret++; ptr = oc + 1; oc = str.indexOf(sub, ptr); }
     return ret;
-}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.str, SAMMIJSON.substr); })(); } break
-case "String Pad Start": { (async () => { PROD_SAMMI_APPLY((str, sub, len) => str.padStart(len, sub), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.str, SAMMIJSON.substr, SAMMIJSON.len); })(); } break
-case "String Pad End": { (async () => { PROD_SAMMI_APPLY((str, sub, len) => str.padEnd(len, sub), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.str, SAMMIJSON.substr, SAMMIJSON.len); })(); } break
+}, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.str, SAMMIJSON.substr); })(); } break
+case "String Pad Start": { (async () => { PROD_SAMMI_APPLY((str, sub, len) => str.padStart(len, sub), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.str, SAMMIJSON.substr, SAMMIJSON.len); })(); } break
+case "String Pad End": { (async () => { PROD_SAMMI_APPLY((str, sub, len) => str.padEnd(len, sub), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.str, SAMMIJSON.substr, SAMMIJSON.len); })(); } break
 [insert_script]
-function PROD_SAMMI_APPLY(fn, output, btn, ...input) { let ret = fn(...input); console.log("ARGS:", ...input, "RETURN:", ret); if (output !== "") SAMMI.setVariable(output, ret, btn); }
-async function GetObject(o, btn) { return (await SAMMI.getVariable(o, btn)).value; }
+function PROD_SAMMI_APPLY(fn, output, btn, instance, ...input) { let ret = fn(...input); if (output !== "") SAMMI.setVariable(output, ret, btn, instance); }
+async function PROD_SAMMI_GET_OBJECT(o, btn) { return (await SAMMI.getVariable(o, btn)).value; }
 [insert_over]

@@ -59,7 +59,7 @@ case "Run Buttons by Deck": { (async () => {
     const list = (await SAMMI.getDeckList()).DeckList;
     for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
         const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
-        PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+        PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
         PROD_SAMMI_RUNBUTTON_RUNBUTTONS(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
     }
 })(); } break
@@ -67,7 +67,7 @@ case "Init Buttons by Deck": { (async () => {
     const list = (await SAMMI.getDeckList()).DeckList;
     for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
         const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
-        PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+        PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
         PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
     }
 })(); } break
@@ -75,7 +75,7 @@ case "Stop Buttons by Deck": { (async () => {
     const list = (await SAMMI.getDeckList()).DeckList;
     for (let i = 1; i < list.length; i += 3) if (list[i] === SAMMIJSON.deck) {
         const buttons = (await SAMMI.getDeck(list[i])).Deck.button_list.map(x => x.button_id)
-        PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+        PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
         PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
     }
 })(); } break
@@ -90,20 +90,20 @@ case "Randomly Run Buttons by Deck": { (async () => {
 })(); } break
 case "Get Buttons by ID": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
 })(); } break
 case "Run Buttons by ID": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
     PROD_SAMMI_RUNBUTTON_RUNBUTTONS(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
 })(); } break
 case "Init Buttons by ID": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
 })(); } break
 case "Stop Buttons by ID": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
 })(); } break
 case "Randomly Run Buttons by ID": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.button_id, SAMMIJSON.condition)).map(x => x.button_id);
@@ -112,20 +112,20 @@ case "Randomly Run Buttons by ID": { (async () => {
 })(); } break
 case "Get Buttons by Label": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
 })(); } break
 case "Run Buttons by Label": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
     PROD_SAMMI_RUNBUTTON_RUNBUTTONS(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
 })(); } break
 case "Init Buttons by Label": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
 })(); } break
 case "Stop Buttons by Label": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
 })(); } break
 case "Randomly Run Buttons by Label": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.text, SAMMIJSON.condition)).map(x => x.button_id);
@@ -134,20 +134,20 @@ case "Randomly Run Buttons by Label": { (async () => {
 })(); } break
 case "Get Buttons by Group": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
 })(); } break
 case "Run Buttons by Group": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
     PROD_SAMMI_RUNBUTTON_RUNBUTTONS(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
 })(); } break
 case "Init Buttons by Group": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
 })(); } break
 case "Stop Buttons by Group": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
 })(); } break
 case "Randomly Run Buttons by Group": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => PROD_SAMMI_RUNBUTTON_GETMODE(SAMMIJSON.mode)(b.group_id, SAMMIJSON.condition)).map(x => x.button_id);
@@ -156,20 +156,20 @@ case "Randomly Run Buttons by Group": { (async () => {
 })(); } break
 case "Get Buttons by Color": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
 })(); } break
 case "Run Buttons by Color": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
     PROD_SAMMI_RUNBUTTON_RUNBUTTONS(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
 })(); } break
 case "Init Buttons by Color": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
 })(); } break
 case "Stop Buttons by Color": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
 })(); } break
 case "Randomly Run Buttons by Color": { (async () => { 
     const buttons = (await PROD_SAMMI_RUNBUTTON_GETBUTTONS(SAMMIJSON.deck)).filter(b => b.color === SAMMIJSON.condition).map(x => x.button_id);
@@ -178,16 +178,16 @@ case "Randomly Run Buttons by Color": { (async () => {
 })(); } break
 case "Run Buttons by ID List": { (async () => { 
     const buttons = await PROD_SAMMI_RUNBUTTON_GETOBJECT(SAMMIJSON.arr, SAMMIJSON.FromButton);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId);
     PROD_SAMMI_RUNBUTTON_RUNBUTTONS(buttons, SAMMIJSON.FromButton, SAMMIJSON.data);
 })(); } break
 case "Init Buttons by ID List": { (async () => { 
     const buttons = await PROD_SAMMI_RUNBUTTON_GETOBJECT(SAMMIJSON.arr, SAMMIJSON.FromButton);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_INITBUTTONS(buttons);
 })(); } break
 case "Stop Buttons by ID List": { (async () => { 
     const buttons = await PROD_SAMMI_RUNBUTTON_GETOBJECT(SAMMIJSON.arr, SAMMIJSON.FromButton);
-    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
+    PROD_SAMMI_RUNBUTTON_SAVE(SAMMIJSON.output, buttons, SAMMIJSON.FromButton, SAMMIJSON.instanceId); PROD_SAMMI_RUNBUTTON_STOPBUTTONS(buttons);
 })(); } break
 case "Randomly Run Buttons by ID List": { (async () => {
     const buttons = await PROD_SAMMI_RUNBUTTON_GETOBJECT(SAMMIJSON.arr, SAMMIJSON.FromButton);
@@ -239,7 +239,7 @@ function PROD_SAMMI_RUNBUTTON_GETMODE(mode) {
     }
     return fn;
 }
-function PROD_SAMMI_RUNBUTTON_SAVE(output, input, btn) {  console.log("SAVE:", output, input, btn); if (output !== "") SAMMI.setVariable(output, input, btn); }
+function PROD_SAMMI_RUNBUTTON_SAVE(output, input, btn, instance) { if (output !== "") SAMMI.setVariable(output, input, btn, instance); }
 async function PROD_SAMMI_RUNBUTTON_GETOBJECT(o, btn) { return (await SAMMI.getVariable(o, btn)).value; }
 [insert_over]
-{ "deck_data": "{ \"background_color\": 0.0, \"on\": true, \"grid_y\": 2.0, \"snap_grid\": true, \"lb_version\": \"2025.1.1\", \"background_image\": \"\", \"sammi_version\": \"2025.1.1\", \"adaptive_resizing\": true, \"unique_id\": \"20250425084019318761006\", \"button_list\": [ { \"color\": 0.0, \"persistent\": true, \"text\": \"Reinitialize Variables\", \"release_duration\": 0.0, \"queueable\": false, \"command_list\": [ { \"cmd\": 294.0, \"obsid\": \"Main\", \"pos\": 0.0, \"vis\": true, \"ms\": 0.0, \"sel\": false, \"dis\": false, \"xpan\": 0.0, \"b0\": \"\\\/$id$\\\/\" } ], \"press_type\": 0.0, \"x\": 0.0, \"is_transparent\": false, \"border\": 2.0, \"image\": \"\", \"triggers\": [ ], \"group_id\": \"\", \"overlappable\": false, \"init_variable\": \"\", \"deck\": 2.0, \"width\": 1.0, \"button_id\": \"RunButtons_Init\", \"button_duration\": 0.0, \"y\": 0.0, \"switch_deck\": \"\", \"height\": 0.5, \"release_list\": [ ], \"functions\": 65.0, \"stretch\": false }, { \"color\": 0.0, \"persistent\": true, \"text\": \"Stop Button\", \"release_duration\": 0.0, \"queueable\": false, \"command_list\": [ { \"cmd\": 133.0, \"v1\": 1.0, \"obsid\": \"Main\", \"pos\": 0.0, \"vis\": true, \"ms\": 0.0, \"sel\": false, \"dis\": false, \"xpan\": 0.0, \"b0\": \"\\\/$id$\\\/\", \"v0\": 1.0, \"v2\": 0.0 } ], \"press_type\": 0.0, \"x\": 0.0, \"is_transparent\": false, \"border\": 2.0, \"image\": \"\", \"triggers\": [ ], \"group_id\": \"\", \"overlappable\": false, \"init_variable\": \"\", \"deck\": 2.0, \"width\": 1.0, \"button_id\": \"RunButtons_Stop\", \"button_duration\": 0.0, \"y\": 0.5, \"switch_deck\": \"\", \"height\": 0.5, \"release_list\": [ ], \"functions\": 65, \"stretch\": false } ], \"deck_name\": \"Run Buttons\", \"grid_x\": 1.0, \"stretch\": false }", "unique_id": "20250425084019318761006", "include_image": { } }
+{ "deck_data": "{ \"background_color\": 0.0, \"on\": true, \"grid_y\": 2.0, \"snap_grid\": 1.0, \"lb_version\": \"2025.1.1\", \"background_image\": \"\", \"sammi_version\": \"2025.1.1\", \"encrypted\": false, \"adaptive_resizing\": 1.0, \"unique_id\": \"20250425084019318761006\", \"button_list\": [ { \"color\": 0.0, \"persistent\": 1.0, \"text\": \"Reinitialize Variables\", \"release_duration\": 0.0, \"queueable\": 0.0, \"command_list\": [ { \"cmd\": 294.0, \"obsid\": \"Main\", \"pos\": 0.0, \"vis\": 1.0, \"ms\": 0.0, \"sel\": 0.0, \"dis\": 0.0, \"xpan\": 0.0, \"b0\": \"\\\/$id$\\\/\" } ], \"press_type\": 0.0, \"x\": 0.0, \"is_transparent\": 0.0, \"border\": 2.0, \"image\": \"\", \"triggers\": [ ], \"group_id\": \"\", \"overlappable\": 0.0, \"init_variable\": \"\", \"deck\": 1.0, \"width\": 1.0, \"button_id\": \"RunButtons_Init\", \"button_duration\": 0.0, \"y\": 0.0, \"switch_deck\": \"\", \"height\": 0.5, \"release_list\": [ ], \"functions\": 65, \"stretch\": 0.0 }, { \"color\": 0.0, \"persistent\": 1.0, \"text\": \"Stop Button\", \"release_duration\": 0.0, \"queueable\": 0.0, \"command_list\": [ { \"cmd\": 133.0, \"v1\": 1.0, \"obsid\": \"Main\", \"pos\": 0.0, \"vis\": 1.0, \"ms\": 0.0, \"sel\": 0.0, \"dis\": 0.0, \"xpan\": 0.0, \"b0\": \"\\\/$id$\\\/\", \"v0\": 1.0, \"v2\": 0.0 } ], \"press_type\": 0.0, \"x\": 0.0, \"is_transparent\": 0.0, \"border\": 2.0, \"image\": \"\", \"triggers\": [ ], \"group_id\": \"\", \"overlappable\": 0.0, \"init_variable\": \"\", \"deck\": 1.0, \"width\": 1.0, \"button_id\": \"RunButtons_Stop\", \"button_duration\": 0.0, \"y\": 0.5, \"switch_deck\": \"\", \"height\": 0.5, \"release_list\": [ ], \"functions\": 65, \"stretch\": 0.0 } ], \"deck_name\": \"Run Buttons\", \"grid_x\": 1.0, \"stretch\": 0.0 }", "unique_id": "20250425084019318761006", "include_image": { } }

@@ -30,11 +30,11 @@ SAMMI.extCommand('Get Date/Time with Milliseconds', 3355443, 52, { 'input': ['In
 SAMMI.extCommand('Format Time with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'DDDD:hh:mm:ss.sss'], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Format Date with Milliseconds', 3355443, 52, { 'input': ['Input Time', 14, 'now'], 'format': ['Time Format', 14, 'YYYY-MM-DDThh:mm:ss.ssssZZZZ'], 'output': ['Save Variable As', 14, ''] });
 [insert_hook]
-case "Get Date/Time with Milliseconds": { PROD_SAMMI_APPLY(time, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input); } break
-case "Format Time with Milliseconds": { PROD_SAMMI_APPLY((i, f) => formatTime(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
-case "Format Date with Milliseconds": { PROD_SAMMI_APPLY((i, f) => formatDate(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.input, SAMMIJSON.format); } break
+case "Get Date/Time with Milliseconds": { PROD_SAMMI_APPLY(time, SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.input); } break
+case "Format Time with Milliseconds": { PROD_SAMMI_APPLY((i, f) => formatTime(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.input, SAMMIJSON.format); } break
+case "Format Date with Milliseconds": { PROD_SAMMI_APPLY((i, f) => formatDate(time(i), f), SAMMIJSON.output, SAMMIJSON.FromButton, SAMMIJSON.instanceId, SAMMIJSON.input, SAMMIJSON.format); } break
 [insert_script]
-function PROD_SAMMI_APPLY(fn, output, btn, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn); }
+function PROD_SAMMI_APPLY(fn, output, btn, instance, ...input) { if (output !== "") SAMMI.setVariable(output, fn(...input), btn, instance); }
 //* #REGION time operation
 // dealing with timezones sucks
 let PROD_SAMMI_FORMATTIME, PROD_SAMMI_FORMATDATE;

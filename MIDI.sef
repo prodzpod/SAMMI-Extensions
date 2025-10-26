@@ -42,7 +42,7 @@ SAMMI.extCommand('MIDI: Press Note', 3355443, 52, { 'output': ['Output Device Na
 SAMMI.extCommand('MIDI: Release Note', 3355443, 52, { 'output': ['Output Device Name', 14, ''], 'channel': ['channel', 15, 0], 'note': ['note', 14, ''], 'time': ['Offset (in ms)', 15, 0], 'relative': ['Relative to Now', 2, true] });
 PRODSAMMI_MIDI_MAIN();
 [insert_hook]
-case "MIDI: Get List of Devices": { SAMMI.setVariable(SAMMIJSON.output, Object.keys(SAMMIJSON.target === "Inputs" ? PRODSAMMI_MIDI_INPUTS : PRODSAMMI_MIDI_OUTPUTS), SAMMIJSON.FromButton); } break
+case "MIDI: Get List of Devices": { SAMMI.setVariable(SAMMIJSON.output, Object.keys(SAMMIJSON.target === "Inputs" ? PRODSAMMI_MIDI_INPUTS : PRODSAMMI_MIDI_OUTPUTS), SAMMIJSON.FromButton, SAMMIJSON.instanceId); } break
 case "MIDI: Send Bytes": { 
     let byte = SAMMIJSON.byte;
     if (byte.startsWith("0x")) byte = byte.slice(2);
