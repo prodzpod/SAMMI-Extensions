@@ -40,9 +40,9 @@ SAMMI.extCommand('Array Intersect', 3355443, 52, { 'a': ['Input Array 1', 14, ''
 SAMMI.extCommand('Array Union', 3355443, 52, { 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Object Union', 3355443, 52, { 'a': ['Input Object 1', 14, ''], 'b': ['Input Object 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Array Exclusion', 3355443, 52, { 'a': ['Input Array 1', 14, ''], 'b': ['Input Array 2', 14, ''], 'output': ['Save Variable As', 14, ''] });
-SAMMI.extCommand('Object Filter by Key', 3355443, 52, { 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
-SAMMI.extCommand('Object Filter by Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, ''], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
-SAMMI.extCommand('Object Map Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'operator': ['Operator', 9, ''], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Filter by Key', 3355443, 52, { 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, '=='], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Filter by Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'compare': ['Compare', 8, '=='], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
+SAMMI.extCommand('Object Map Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'operator': ['Operator', 9, '='], 'number': ['Variable/Number', 15, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Object Get Sorted Keys by Value', 3355443, 52, { 'input': ['Input Object', 14, ''], 'asc': ['Ascending', 2, false], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Get Random Element', 3355443, 52, { 'input': ['Input Array', 14, ''], 'output': ['Save Variable As', 14, ''] });
 SAMMI.extCommand('Get Random Element From Weighted List', 3355443, 52, { 'input': ['Input Object(Key: Output, Value: Weight)', 14, ''], 'output': ['Save Variable As', 14, ''] });
